@@ -1,0 +1,563 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Language | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f1fa;
+            color: #49225b;
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #eadfed;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            color: #6e3482;
+        }
+
+        .back-btn {
+            color: #49225b;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .back-btn:hover {
+            color: #6e3482;
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            color: #3e194d;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #817187;
+            font-size: 14px;
+        }
+
+        /* LANGUAGE BOX */
+
+        .language-box {
+            background: white;
+            border: 1px solid #eadfed;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(73, 34, 91, 0.07);
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 20px 22px;
+
+            border-bottom: 1px solid #eee5f1;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .language-option:last-child {
+            border-bottom: none;
+        }
+
+        .language-option:hover {
+            background: #faf5fc;
+        }
+
+        .language-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .language-icon {
+            width: 45px;
+            height: 45px;
+
+            border-radius: 12px;
+
+            background: #f1e3f5;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+        .language-name {
+            color: #3e194d;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .language-native {
+            color: #8b7b91;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* RADIO */
+
+        .radio {
+            width: 21px;
+            height: 21px;
+
+            border: 2px solid #b9a5c0;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .radio.active {
+            border-color: #6e3482;
+        }
+
+        .radio.active::after {
+            content: "";
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #6e3482;
+        }
+
+        /* SAVE */
+
+        .save-btn {
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #6e3482;
+            color: white;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .save-btn:hover {
+            background: #582867;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 35px 20px;
+
+            background: #49225b;
+            color: white;
+        }
+
+        footer p {
+            color: #d8c9dd;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        /* DARK MODE */
+
+        body.dark-mode {
+            background: #17121b;
+            color: white;
+        }
+
+        body.dark-mode .navbar {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .back-btn {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .page-title h1 {
+            color: white;
+        }
+
+        body.dark-mode .page-title p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .language-box {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .language-option {
+            border-color: #392a40;
+        }
+
+        body.dark-mode .language-option:hover {
+            background: #2a1e30;
+        }
+
+        body.dark-mode .language-name {
+            color: white;
+        }
+
+        body.dark-mode .language-native {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .language-icon {
+            background: #34253b;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .container {
+                margin-top: 35px;
+            }
+
+            .page-title h1 {
+                font-size: 28px;
+            }
+
+            .language-option {
+                padding: 17px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'settings' %}" class="back-btn">
+            ← Back
+        </a>
+
+        <a href="{% url 'home' %}" class="logo">
+            VastraHub
+        </a>
+
+        <span></span>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <div class="page-title">
+
+            <h1>Language</h1>
+
+            <p>
+                Select your preferred language for VastraHub.
+            </p>
+
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="language-box">
+
+
+                <!-- ENGLISH -->
+
+                <div class="language-option"
+                     onclick="selectLanguage('english')">
+
+                    <div class="language-left">
+
+                        <div class="language-icon">
+                            🇬🇧
+                        </div>
+
+                        <div>
+
+                            <div class="language-name">
+                                English
+                            </div>
+
+                            <div class="language-native">
+                                English
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="radio active"
+                         id="radio-english">
+                    </div>
+
+                </div>
+
+
+                <!-- HINDI -->
+
+                <div class="language-option"
+                     onclick="selectLanguage('hindi')">
+
+                    <div class="language-left">
+
+                        <div class="language-icon">
+                            🇮🇳
+                        </div>
+
+                        <div>
+
+                            <div class="language-name">
+                                Hindi
+                            </div>
+
+                            <div class="language-native">
+                                हिन्दी
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="radio"
+                         id="radio-hindi">
+                    </div>
+
+                </div>
+
+
+                <!-- GUJARATI -->
+
+                <div class="language-option"
+                     onclick="selectLanguage('gujarati')">
+
+                    <div class="language-left">
+
+                        <div class="language-icon">
+                            🇮🇳
+                        </div>
+
+                        <div>
+
+                            <div class="language-name">
+                                Gujarati
+                            </div>
+
+                            <div class="language-native">
+                                ગુજરાતી
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="radio"
+                         id="radio-gujarati">
+                    </div>
+
+                </div>
+
+
+                <!-- MARATHI -->
+
+                <div class="language-option"
+                     onclick="selectLanguage('marathi')">
+
+                    <div class="language-left">
+
+                        <div class="language-icon">
+                            🇮🇳
+                        </div>
+
+                        <div>
+
+                            <div class="language-name">
+                                Marathi
+                            </div>
+
+                            <div class="language-native">
+                                मराठी
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="radio"
+                         id="radio-marathi">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <input type="hidden"
+                   name="language"
+                   id="languageInput"
+                   value="english">
+
+
+            <button type="submit"
+                    class="save-btn">
+
+                Save Language
+
+            </button>
+
+        </form>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>
+            VastraHub
+        </strong>
+
+        <p>
+            Fashion that defines your style.
+        </p>
+
+        <p>
+            © 2026 VastraHub. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- THEME -->
+
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+    <!-- LANGUAGE JS -->
+
+    <script>
+
+        function selectLanguage(language) {
+
+            const languages = [
+                "english",
+                "hindi",
+                "gujarati",
+                "marathi"
+            ];
+
+            languages.forEach(function(item) {
+
+                const radio =
+                    document.getElementById(
+                        "radio-" + item
+                    );
+
+                if (radio) {
+                    radio.classList.remove("active");
+                }
+
+            });
+
+
+            const selected =
+                document.getElementById(
+                    "radio-" + language
+                );
+
+            if (selected) {
+                selected.classList.add("active");
+            }
+
+
+            document.getElementById(
+                "languageInput"
+            ).value = language;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

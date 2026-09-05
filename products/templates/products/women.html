@@ -1,0 +1,957 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Women | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f1fa;
+            color: #49225b;
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #eadfed;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            color: #6e3482;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 700;
+            color: #49225b;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: #6e3482;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            max-width: 1400px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        .hero-box {
+            min-height: 230px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(73, 34, 91, 0.95),
+                    rgba(110, 52, 130, 0.72)
+                ),
+                url("{% static 'products/images/women.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: center;
+
+            padding: 40px;
+
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 14px;
+            color: #eee;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 20px 70px;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+        .title h2 {
+            font-size: 25px;
+            color: #3e194d;
+        }
+
+        .title p {
+            font-size: 12px;
+            color: #817187;
+            margin-top: 5px;
+        }
+
+        /* ================= SORT ================= */
+
+        .sort-box select {
+            border: 1px solid #d8c9dd;
+            background: white;
+
+            padding: 10px 13px;
+
+            border-radius: 8px;
+
+            color: #49225b;
+            font-size: 12px;
+
+            outline: none;
+        }
+
+        /* ================= PRODUCT GRID ================= */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        /* ================= CARD ================= */
+
+        .product-card {
+            background: white;
+
+            border: 1px solid #eadfed;
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            position: relative;
+
+            box-shadow:
+                0 7px 22px rgba(73, 34, 91, 0.06);
+
+            transition: 0.25s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 14px 30px rgba(73, 34, 91, 0.12);
+        }
+
+        /* ================= IMAGE ================= */
+
+        .image-box {
+            width: 100%;
+            height: 290px;
+
+            background: #f1e9f4;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: 0.3s;
+        }
+
+        .product-card:hover .image-box img {
+            transform: scale(1.04);
+        }
+
+        /* ================= WISHLIST ================= */
+
+        .wishlist {
+            position: absolute;
+
+            right: 10px;
+            top: 10px;
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #b4233c;
+
+            font-size: 17px;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+
+            z-index: 2;
+        }
+
+        .wishlist:hover {
+            background: #b4233c;
+            color: white;
+        }
+
+        /* ================= BADGE ================= */
+
+        .badge {
+            position: absolute;
+
+            left: 10px;
+            top: 10px;
+
+            background: #6e3482;
+            color: white;
+
+            padding: 5px 8px;
+
+            border-radius: 5px;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        /* ================= INFO ================= */
+
+        .product-info {
+            padding: 14px;
+        }
+
+        .product-name {
+            color: #49225b;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            margin-bottom: 6px;
+        }
+
+        .description {
+            color: #817187;
+
+            font-size: 10px;
+
+            line-height: 1.4;
+
+            height: 29px;
+
+            overflow: hidden;
+
+            margin-bottom: 10px;
+        }
+
+        /* ================= PRICE ================= */
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: 15px;
+            font-weight: 900;
+            color: #49225b;
+        }
+
+        .mrp {
+            font-size: 10px;
+            color: #9b8da0;
+            text-decoration: line-through;
+        }
+
+        .discount {
+            font-size: 9px;
+            font-weight: 800;
+            color: #218545;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .view-btn {
+            width: 100%;
+            height: 38px;
+
+            border-radius: 7px;
+
+            background: #6e3482;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .view-btn:hover {
+            background: #582867;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            background: white;
+
+            border: 1px solid #eadfed;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            padding: 70px 20px;
+        }
+
+        .empty-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .empty h2 {
+            font-size: 22px;
+            color: #49225b;
+            margin-bottom: 7px;
+        }
+
+        .empty p {
+            color: #817187;
+            font-size: 12px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #49225b;
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        footer h2 {
+            font-size: 21px;
+            margin-bottom: 6px;
+        }
+
+        footer p {
+            color: #d8c9dd;
+            font-size: 12px;
+        }
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode {
+            background: #17121b;
+            color: white;
+        }
+
+        body.dark-mode .navbar {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .nav-links a:hover,
+        body.dark-mode .nav-links .active {
+            color: #dda4eb;
+        }
+
+        body.dark-mode .title h2 {
+            color: white;
+        }
+
+        body.dark-mode .title p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .sort-box select {
+            background: #211827;
+            border-color: #51405a;
+            color: #eadff0;
+        }
+
+        body.dark-mode .product-card {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .image-box {
+            background: #2a1e30;
+        }
+
+        body.dark-mode .wishlist {
+            background: #2a1e30;
+            color: #ff91a3;
+        }
+
+        body.dark-mode .product-name {
+            color: #eadff0;
+        }
+
+        body.dark-mode .description {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .price {
+            color: white;
+        }
+
+        body.dark-mode .empty {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .empty h2 {
+            color: white;
+        }
+
+        body.dark-mode .empty p {
+            color: #bcaec2;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+        }
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .image-box {
+                height: 270px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 0 12px;
+            }
+
+            .hero-box {
+                min-height: 200px;
+                padding: 25px;
+            }
+
+            .hero-content h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                padding: 10px 12px 50px;
+            }
+
+            .top-row {
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .title h2 {
+                font-size: 21px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .image-box {
+                height: 250px;
+            }
+
+            .product-info {
+                padding: 10px;
+            }
+
+            .product-name {
+                font-size: 12px;
+            }
+
+            .description {
+                font-size: 9px;
+            }
+
+            .price {
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            VastraHub
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'men' %}">
+                Men
+            </a>
+
+            <a href="{% url 'women' %}" class="active">
+                Women
+            </a>
+
+            <a href="{% url 'kids' %}">
+                Kids
+            </a>
+
+        </div>
+
+
+        <div class="nav-icons">
+
+            <a href="{% url 'wishlist' %}" class="nav-icon">
+                ❤️
+            </a>
+
+            <a href="{% url 'cart' %}" class="nav-icon">
+                🛒
+            </a>
+
+            <a href="{% url 'profile' %}" class="nav-icon">
+                👤
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-box">
+
+            <div class="hero-content">
+
+                <h1>
+                    Women's Collection
+                </h1>
+
+                <p>
+                    Discover the latest styles made for you.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= PRODUCTS ================= -->
+
+    <main class="container">
+
+
+        <div class="top-row">
+
+            <div class="title">
+
+                <h2>
+                    Women's Fashion
+                </h2>
+
+                <p>
+                    {{ products|length }} products available
+                </p>
+
+            </div>
+
+
+            <div class="sort-box">
+
+                <select id="sortProducts">
+
+                    <option value="default">
+                        Sort: Latest
+                    </option>
+
+                    <option value="low">
+                        Price: Low to High
+                    </option>
+
+                    <option value="high">
+                        Price: High to Low
+                    </option>
+
+                    <option value="name">
+                        Name: A to Z
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        {% if products %}
+
+
+            <div class="product-grid" id="productGrid">
+
+
+                {% for product in products %}
+
+
+                    <div
+                        class="product-card"
+                        data-price="{{ product.price }}"
+                        data-name="{{ product.name|lower }}"
+                    >
+
+
+                        <!-- IMAGE -->
+
+                        <div class="image-box">
+
+
+                            {% if product.image %}
+
+                                <img
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                >
+
+                            {% else %}
+
+                                <img
+                                    src="{% static 'products/images/no-image.png' %}"
+                                    alt="No image"
+                                >
+
+                            {% endif %}
+
+
+                            {% if product.discount %}
+
+                                <div class="badge">
+                                    {{ product.discount }}% OFF
+                                </div>
+
+                            {% endif %}
+
+
+                            <a
+                                href="{% url 'add_to_wishlist' product.id %}"
+                                class="wishlist"
+                                title="Add to Wishlist"
+                            >
+                                ♡
+                            </a>
+
+
+                        </div>
+
+
+
+                        <!-- INFO -->
+
+                        <div class="product-info">
+
+
+                            <div class="product-name">
+                                {{ product.name }}
+                            </div>
+
+
+                            <div class="description">
+                                {{ product.description }}
+                            </div>
+
+
+                            <div class="price-row">
+
+                                <span class="price">
+                                    ₹{{ product.price }}
+                                </span>
+
+
+                                {% if product.mrp %}
+
+                                    <span class="mrp">
+                                        ₹{{ product.mrp }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if product.discount %}
+
+                                    <span class="discount">
+                                        {{ product.discount }}% OFF
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <a
+                                href="{% url 'product_detail' product.id %}"
+                                class="view-btn"
+                            >
+                                View Product
+                            </a>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    👗
+                </div>
+
+                <h2>
+                    No Women's Products Yet
+                </h2>
+
+                <p>
+                    Women's products will appear here when added from Admin.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h2>
+            VastraHub
+        </h2>
+
+        <p>
+            Fashion that defines your style.
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================= THEME ================= -->
+
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+
+    <!-- ================= SORT JS ================= -->
+
+    <script>
+
+        const sortProducts =
+            document.getElementById("sortProducts");
+
+        const productGrid =
+            document.getElementById("productGrid");
+
+
+        if (sortProducts && productGrid) {
+
+            sortProducts.addEventListener(
+                "change",
+                function () {
+
+                    const cards =
+                        Array.from(
+                            productGrid.children
+                        );
+
+
+                    if (this.value === "low") {
+
+                        cards.sort(
+                            (a, b) =>
+                                parseFloat(a.dataset.price) -
+                                parseFloat(b.dataset.price)
+                        );
+
+                    }
+
+
+                    else if (this.value === "high") {
+
+                        cards.sort(
+                            (a, b) =>
+                                parseFloat(b.dataset.price) -
+                                parseFloat(a.dataset.price)
+                        );
+
+                    }
+
+
+                    else if (this.value === "name") {
+
+                        cards.sort(
+                            (a, b) =>
+                                a.dataset.name.localeCompare(
+                                    b.dataset.name
+                                )
+                        );
+
+                    }
+
+
+                    cards.forEach(
+                        card => productGrid.appendChild(card)
+                    );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

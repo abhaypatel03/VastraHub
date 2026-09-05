@@ -1,0 +1,421 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Account | VastraHub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f1fa;
+            color: #49225b;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #eadfed;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #6e3482;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #5b4663;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #6e3482;
+        }
+
+        /* MAIN */
+        .container {
+            width: 100%;
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #6e3482;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .delete-card {
+            background: white;
+            border: 1px solid #eadfed;
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(73, 34, 91, 0.08);
+        }
+
+        .warning-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #fff0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 12px;
+            color: #3e194d;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #77677d;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .warning-box {
+            background: #fff7f7;
+            border: 1px solid #f1cccc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .warning-box h3 {
+            color: #b42323;
+            margin-bottom: 12px;
+        }
+
+        .warning-box ul {
+            padding-left: 20px;
+            color: #654f69;
+            line-height: 1.8;
+        }
+
+        .confirm-area {
+            margin-top: 25px;
+        }
+
+        .confirm-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4d3955;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #d9c9df;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            background: white;
+        }
+
+        .password-input:focus {
+            border-color: #6e3482;
+            box-shadow: 0 0 0 3px rgba(110, 52, 130, 0.1);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .cancel-btn,
+        .delete-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background: #f1e8f4;
+            color: #5e3a69;
+            border: none;
+        }
+
+        .cancel-btn:hover {
+            background: #e6d9ea;
+        }
+
+        .delete-btn {
+            background: #c62828;
+            color: white;
+            border: none;
+        }
+
+        .delete-btn:hover {
+            background: #a91f1f;
+        }
+
+        .note {
+            text-align: center;
+            color: #8a7a8f;
+            font-size: 13px;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        /* MESSAGES */
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            padding: 13px 16px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background: #f3eafa;
+            color: #49225b;
+        }
+
+        /* DARK MODE */
+        body.dark-mode {
+            background: #17121b;
+            color: #f5edf8;
+        }
+
+        body.dark-mode .navbar,
+        body.dark-mode .delete-card {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .nav-links a:hover,
+        body.dark-mode .back {
+            color: #d18ae8;
+        }
+
+        body.dark-mode h1 {
+            color: white;
+        }
+
+        body.dark-mode .subtitle,
+        body.dark-mode .warning-box li,
+        body.dark-mode .confirm-label,
+        body.dark-mode .note {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .warning-box {
+            background: #2b1c20;
+            border-color: #573238;
+        }
+
+        body.dark-mode .password-input {
+            background: #2a1e30;
+            color: white;
+            border-color: #4a3851;
+        }
+
+        body.dark-mode .cancel-btn {
+            background: #35233d;
+            color: #e0cfe5;
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                margin: 30px auto;
+            }
+
+            .delete-card {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            VastraHub
+        </a>
+
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'men' %}">Men</a>
+            <a href="{% url 'women' %}">Women</a>
+            <a href="{% url 'kids' %}">Kids</a>
+            <a href="{% url 'profile' %}">Profile</a>
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <a href="{% url 'settings' %}" class="back">
+            ← Back to Settings
+        </a>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+        <div class="delete-card">
+
+            <div class="warning-icon">
+                ⚠️
+            </div>
+
+            <h1>Delete Your Account</h1>
+
+            <p class="subtitle">
+                We're sorry to see you go. Please make sure you really want
+                to delete your VastraHub account before continuing.
+            </p>
+
+
+            <div class="warning-box">
+
+                <h3>⚠️ Before you delete your account</h3>
+
+                <ul>
+                    <li>Your account information will be removed.</li>
+                    <li>Your wishlist and cart data may be removed.</li>
+                    <li>You may lose access to your account history.</li>
+                    <li>This action may not be reversible.</li>
+                </ul>
+
+            </div>
+
+
+            <!-- DELETE FORM -->
+            <form method="POST"
+                  action="{% url 'delete_account' %}"
+                  onsubmit="return confirmDelete();">
+
+                {% csrf_token %}
+
+                <div class="confirm-area">
+
+                    <label class="confirm-label">
+                        Enter your password to confirm
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="password-input"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <a href="{% url 'settings' %}"
+                       class="cancel-btn">
+                        Cancel
+                    </a>
+
+                    <button type="submit"
+                            class="delete-btn">
+                        Delete My Account
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <p class="note">
+                For your security, account deletion requires your password.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- THEME JS -->
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+    <script>
+        function confirmDelete() {
+
+            return confirm(
+                "Are you sure you want to delete your VastraHub account? This action may not be reversible."
+            );
+
+        }
+    </script>
+
+</body>
+</html>

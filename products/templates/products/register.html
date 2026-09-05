@@ -1,0 +1,805 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | VastraHub</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f7f1fa;
+            color: #49225b;
+
+            display: flex;
+            flex-direction: column;
+
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+
+            background: white;
+            border-bottom: 1px solid #eadfed;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+        }
+
+        .logo {
+            color: #6e3482;
+
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .home-link {
+            color: #49225b;
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .home-link:hover {
+            color: #6e3482;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+            flex: 1;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 45px 20px;
+        }
+
+
+        /* ================= REGISTER CARD ================= */
+
+        .register-card {
+            width: 100%;
+            max-width: 500px;
+
+            background: white;
+
+            border: 1px solid #eadfed;
+            border-radius: 20px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 12px 35px rgba(73, 34, 91, 0.10);
+        }
+
+
+        .register-header {
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+        .register-icon {
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #eee1f3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+        .register-header h1 {
+            color: #3e194d;
+
+            font-size: 28px;
+
+            margin-bottom: 7px;
+        }
+
+        .register-header p {
+            color: #817187;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= MESSAGES ================= */
+
+        .messages {
+            margin-bottom: 18px;
+        }
+
+        .message {
+            background: #fff0f2;
+
+            border: 1px solid #f2c8cf;
+
+            color: #a3213a;
+
+            padding: 11px 13px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-row {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+
+            color: #49225b;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            margin-bottom: 7px;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            height: 45px;
+
+            border: 1px solid #d8c9dd;
+
+            border-radius: 9px;
+
+            padding: 0 13px;
+
+            outline: none;
+
+            background: white;
+
+            color: #49225b;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #6e3482;
+
+            box-shadow:
+                0 0 0 3px rgba(110, 52, 130, 0.10);
+        }
+
+
+        /* ================= PASSWORD ================= */
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 75px;
+        }
+
+        .show-password {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: none;
+
+            color: #6e3482;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= PASSWORD HELP ================= */
+
+        .password-help {
+            color: #817187;
+
+            font-size: 10px;
+
+            margin-top: 6px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================= REGISTER BUTTON ================= */
+
+        .register-btn {
+            width: 100%;
+
+            height: 47px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #6e3482;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            margin-top: 5px;
+        }
+
+        .register-btn:hover {
+            background: #582867;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ================= LOGIN ================= */
+
+        .login-text {
+            text-align: center;
+
+            color: #817187;
+
+            font-size: 13px;
+
+            margin-top: 22px;
+        }
+
+        .login-text a {
+            color: #6e3482;
+
+            font-weight: 800;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #49225b;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px 20px;
+        }
+
+        footer h2 {
+            font-size: 20px;
+
+            margin-bottom: 5px;
+        }
+
+        footer p {
+            color: #d8c9dd;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode {
+            background: #17121b;
+
+            color: white;
+        }
+
+        body.dark-mode .navbar {
+            background: #211827;
+
+            border-color: #392a40;
+        }
+
+        body.dark-mode .home-link {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .register-card {
+            background: #211827;
+
+            border-color: #392a40;
+        }
+
+        body.dark-mode .register-icon {
+            background: #34253b;
+        }
+
+        body.dark-mode .register-header h1 {
+            color: white;
+        }
+
+        body.dark-mode .register-header p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .form-group label {
+            color: #eadff0;
+        }
+
+        body.dark-mode .form-group input {
+            background: #2a1e30;
+
+            border-color: #5b4862;
+
+            color: white;
+        }
+
+        body.dark-mode .form-group input::placeholder {
+            color: #9e8fa4;
+        }
+
+        body.dark-mode .password-help,
+        body.dark-mode .login-text {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .show-password {
+            color: #dda4eb;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .main {
+                padding: 30px 15px;
+            }
+
+            .register-card {
+                padding: 25px 18px;
+
+                border-radius: 16px;
+            }
+
+            .register-header h1 {
+                font-size: 25px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}"
+           class="logo">
+
+            VastraHub
+
+        </a>
+
+
+        <a href="{% url 'home' %}"
+           class="home-link">
+
+            ← Home
+
+        </a>
+
+    </nav>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <div class="register-card">
+
+
+            <!-- HEADER -->
+
+            <div class="register-header">
+
+                <div class="register-icon">
+                    👤
+                </div>
+
+                <h1>
+                    Create Account
+                </h1>
+
+                <p>
+                    Join VastraHub and start shopping today.
+                </p>
+
+            </div>
+
+
+
+            <!-- MESSAGES -->
+
+            {% if messages %}
+
+            <div class="messages">
+
+                {% for message in messages %}
+
+                <div class="message">
+                    {{ message }}
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- FORM -->
+
+            <form
+                method="POST"
+                action="{% url 'register' %}"
+                id="registerForm"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- FIRST + LAST NAME -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="first_name">
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            placeholder="Enter first name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="last_name">
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="last_name"
+                            name="last_name"
+                            placeholder="Enter last name"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Choose a username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword('password', this)"
+                        >
+                            SHOW
+                        </button>
+
+                    </div>
+
+                    <div class="password-help">
+                        Use at least 8 characters with a mix of letters and numbers.
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirm_password">
+                        Confirm Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            placeholder="Enter password again"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword('confirm_password', this)"
+                        >
+                            SHOW
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="register-btn"
+                >
+                    Create Account
+                </button>
+
+
+            </form>
+
+
+
+            <!-- LOGIN -->
+
+            <div class="login-text">
+
+                Already have an account?
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h2>
+            VastraHub
+        </h2>
+
+        <p>
+            Fashion that defines your style.
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================= THEME ================= -->
+
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+
+    <!-- ================= JS ================= -->
+
+    <script>
+
+        function togglePassword(id, button) {
+
+            const input =
+                document.getElementById(id);
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                button.innerText = "HIDE";
+
+            } else {
+
+                input.type = "password";
+
+                button.innerText = "SHOW";
+
+            }
+
+        }
+
+
+        document
+            .getElementById("registerForm")
+            .addEventListener("submit", function(event) {
+
+                const password =
+                    document.getElementById("password").value;
+
+                const confirmPassword =
+                    document.getElementById("confirm_password").value;
+
+
+                if (password !== confirmPassword) {
+
+                    event.preventDefault();
+
+                    alert("Passwords do not match.");
+
+                    return;
+
+                }
+
+
+                if (password.length < 8) {
+
+                    event.preventDefault();
+
+                    alert("Password must be at least 8 characters.");
+
+                }
+
+            });
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,444 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | VastraHub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f3fa;
+            color: #34213f;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            height: 70px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #6e3482;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b3157;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #8b4ba3;
+        }
+
+        /* MAIN */
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 45px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            color: #49225b;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* SETTINGS CARD */
+        .settings-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(73,34,91,0.10);
+        }
+
+        .section-title {
+            padding: 20px 25px;
+            background: #f1e7f5;
+            color: #49225b;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            padding: 20px 25px;
+            border-bottom: 1px solid #eeeeee;
+            transition: 0.25s;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-item:hover {
+            background: #faf5fc;
+            transform: translateX(3px);
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #f1e4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            margin-right: 17px;
+        }
+
+        .setting-content {
+            flex: 1;
+        }
+
+        .setting-content h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #3e2947;
+        }
+
+        .setting-content p {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .arrow {
+            font-size: 28px;
+            color: #9a7ca5;
+        }
+
+        /* LOGOUT */
+        .logout-box {
+            margin-top: 25px;
+            background: white;
+            border-radius: 18px;
+            padding: 20px 25px;
+            box-shadow: 0 5px 20px rgba(73,34,91,0.08);
+        }
+
+        .logout-btn {
+            width: 100%;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            background: #fbe9ed;
+            color: #c0395a;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #f8dce2;
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin-top: 30px;
+            }
+
+            .page-title h1 {
+                font-size: 27px;
+            }
+
+            .setting-item {
+                padding: 17px;
+            }
+
+            .icon {
+                width: 43px;
+                height: 43px;
+                font-size: 20px;
+            }
+
+            .setting-content h3 {
+                font-size: 15px;
+            }
+
+            .setting-content p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            VASTRAHUB
+        </a>
+
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'men' %}">Men</a>
+            <a href="{% url 'women' %}">Women</a>
+            <a href="{% url 'kids' %}">Kids</a>
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <div class="page-title">
+            <h1>Settings</h1>
+            <p>Manage your VastraHub account</p>
+        </div>
+
+
+        <div class="settings-card">
+
+            <div class="section-title">
+                Account
+            </div>
+
+            <!-- Profile -->
+            <a href="{% url 'profile' %}" class="setting-item">
+
+                <div class="icon">
+                    👤
+                </div>
+
+                <div class="setting-content">
+                    <h3>My Profile</h3>
+                    <p>View and manage your profile information</p>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+
+            <!-- My Orders -->
+            <a href="{% url 'my_orders' %}" class="setting-item">
+
+                <div class="icon">
+                    📦
+                </div>
+
+                <div class="setting-content">
+                    <h3>My Orders</h3>
+                    <p>View your orders and order history</p>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+
+            <!-- Wishlist -->
+            <a href="{% url 'wishlist' %}" class="setting-item">
+
+                <div class="icon">
+                    ❤️
+                </div>
+
+                <div class="setting-content">
+                    <h3>Wishlist</h3>
+                    <p>View your saved products</p>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+
+            <!-- Address -->
+           <a href="{% url 'my_address' %}" class="setting-item">
+
+                <div class="icon">
+                    📍
+                </div>
+
+                <div class="setting-content">
+                    <h3>My Address</h3>
+                    <p>Manage your delivery addresses</p>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <!-- SECURITY -->
+        <div class="settings-card" style="margin-top:25px;">
+
+            <div class="section-title">
+                Security
+            </div>
+
+
+            <!-- Change Password -->
+            <a href="{% url 'change_password' %}" class="setting-item">
+
+                <div class="icon">
+                    🔐
+                </div>
+
+                <div class="setting-content">
+                    <h3>Change Password</h3>
+                    <p>Update your account password</p>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+
+            <!-- Privacy -->
+            <a href="{% url 'privacy_security' %}" class="setting-item">
+
+                <div class="icon">
+                    🔒
+                </div>
+
+                <div class="setting-content">
+                    <h3>Privacy & Security</h3>
+                    <p>Manage your privacy and security</p>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <!-- HELP -->
+        <div class="settings-card" style="margin-top:25px;">
+
+            <div class="section-title">
+                Support
+            </div>
+
+
+            <!-- Help -->
+            <a href="{% url 'help_support' %}" class="setting-item">
+
+                <div class="icon">
+                    ❓
+                </div>
+
+                <div class="setting-content">
+                    <h3>Help & Support</h3>
+                    <p>Get help with your VastraHub account</p>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+
+            <!-- About -->
+            <a href="{% url 'about' %}" class="setting-item">
+
+                <div class="icon">
+                    ℹ️
+                </div>
+
+                <div class="setting-content">
+                    <h3>About VastraHub</h3>
+                    <p>Information about VastraHub</p>
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+        <div class="logout-box">
+
+            <form method="post" action="{% url 'logout' %}">
+
+                {% csrf_token %}
+
+                <button type="submit" class="logout-btn">
+                    Logout
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

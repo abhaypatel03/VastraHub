@@ -1,0 +1,552 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>404 | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f7effa;
+
+            color: #49225b;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            height: 75px;
+
+            background: #ffffff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            border-bottom:
+                1px solid #eadcf0;
+        }
+
+
+        .logo {
+            font-size: 30px;
+
+            font-weight: 800;
+
+            color: #49225b;
+        }
+
+
+        .logo span {
+            color: #8b4aa8;
+        }
+
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+        }
+
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #624b6c;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .nav-links a:hover {
+            color: #6e3482;
+        }
+
+
+        /* =========================
+           404 SECTION
+        ========================== */
+
+        .error-page {
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 50px 7%;
+        }
+
+
+        .error-box {
+            width: 100%;
+
+            max-width: 700px;
+
+            background: #ffffff;
+
+            border:
+                1px solid #eadcf0;
+
+            border-radius: 25px;
+
+            padding: 55px 40px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 45px
+                rgba(73, 34, 91, 0.10);
+        }
+
+
+        /* =========================
+           404 NUMBER
+        ========================== */
+
+        .error-number {
+            font-size: 110px;
+
+            line-height: 1;
+
+            font-weight: 900;
+
+            letter-spacing: 5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6e3482,
+                    #a96bc0
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+            background-clip: text;
+        }
+
+
+        .error-icon {
+            font-size: 55px;
+
+            margin:
+                15px 0;
+        }
+
+
+        .error-box h1 {
+            font-size: 30px;
+
+            color: #49225b;
+
+            margin-bottom: 12px;
+        }
+
+
+        .error-box p {
+            max-width: 520px;
+
+            margin: 0 auto 28px;
+
+            color: #8f7b96;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .btn {
+            text-decoration: none;
+
+            padding: 13px 25px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+
+        .home-btn {
+            background: #6e3482;
+
+            color: #ffffff;
+        }
+
+
+        .home-btn:hover {
+            background: #542667;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .shop-btn {
+            background: #f1e3f6;
+
+            color: #6e3482;
+        }
+
+
+        .shop-btn:hover {
+            background: #e8d4ef;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            min-height: 55px;
+
+            padding: 15px;
+
+            background: #ffffff;
+
+            border-top:
+                1px solid #eadcf0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #927c99;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           TABLET
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+
+            .nav-links {
+                gap: 18px;
+            }
+
+
+            .error-page {
+                padding: 35px 5%;
+            }
+
+
+            .error-box {
+                padding:
+                    45px 25px;
+            }
+
+
+            .error-number {
+                font-size: 90px;
+            }
+
+
+            .error-box h1 {
+                font-size: 26px;
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                height: auto;
+
+                padding: 18px 5%;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+
+            .logo {
+                font-size: 27px;
+            }
+
+
+            .nav-links {
+                gap: 14px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+
+            .error-page {
+                padding:
+                    25px 5%;
+            }
+
+
+            .error-box {
+                padding:
+                    40px 18px;
+
+                border-radius: 20px;
+            }
+
+
+            .error-number {
+                font-size: 75px;
+
+                letter-spacing: 2px;
+            }
+
+
+            .error-icon {
+                font-size: 45px;
+            }
+
+
+            .error-box h1 {
+                font-size: 23px;
+            }
+
+
+            .error-box p {
+                font-size: 13px;
+            }
+
+
+            .buttons {
+                flex-direction: column;
+
+                width: 100%;
+            }
+
+
+            .btn {
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+
+
+        /* =========================
+           SMALL MOBILE
+        ========================== */
+
+        @media (max-width: 400px) {
+
+            .error-number {
+                font-size: 65px;
+            }
+
+
+            .error-box h1 {
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        Vastra<span>Hub</span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'men' %}">
+            Men
+        </a>
+
+        <a href="{% url 'women' %}">
+            Women
+        </a>
+
+        <a href="{% url 'kids' %}">
+            Kids
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     404 CONTENT
+========================== -->
+
+<main class="error-page">
+
+    <div class="error-box">
+
+
+        <div class="error-number">
+            404
+        </div>
+
+
+        <div class="error-icon">
+            🛍️
+        </div>
+
+
+        <h1>
+            Page Not Found
+        </h1>
+
+
+        <p>
+            Oops! The page you're looking for
+            doesn't exist or may have been moved.
+            Don't worry, let's get you back to
+            VastraHub.
+        </p>
+
+
+        <div class="buttons">
+
+            <a
+                href="{% url 'home' %}"
+                class="btn home-btn"
+            >
+                🏠 Back to Home
+            </a>
+
+
+            <a
+                href="{% url 'men' %}"
+                class="btn shop-btn"
+            >
+                🛍️ Start Shopping
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+    © 2026 VastraHub. All Rights Reserved.
+
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1304 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Address | VastraHub</title>
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            background: #f7f2fa;
+            color: #49225b;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            width: 100%;
+            height: 76px;
+            background: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            border-bottom: 1px solid #eadff0;
+
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+            color: #49225b;
+
+            font-size: 25px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            position: relative;
+
+            white-space: nowrap;
+        }
+
+
+        .logo::after {
+            content: "";
+
+            display: inline-block;
+
+            width: 7px;
+            height: 7px;
+
+            background: #8d4aa5;
+
+            border-radius: 50%;
+
+            margin-left: 5px;
+
+            margin-bottom: 3px;
+        }
+
+
+        /* =====================================================
+           NAV LINKS
+        ===================================================== */
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 26px;
+        }
+
+
+        .nav-links a {
+            color: #49225b;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: all 0.2s ease;
+        }
+
+
+        .nav-links a:hover {
+            color: #8d4aa5;
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .container {
+            width: 90%;
+
+            max-width: 950px;
+
+            margin: 45px auto 70px;
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .page-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+        }
+
+
+        .title {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 34px;
+
+            font-weight: bold;
+
+            color: #49225b;
+        }
+
+
+        .subtitle {
+            margin-top: 7px;
+
+            color: #8b7898;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           ADD ADDRESS CARD
+        ===================================================== */
+
+        .address-card {
+            width: 100%;
+
+            background: #ffffff;
+
+            padding: 32px;
+
+            border-radius: 18px;
+
+            border: 1px solid #eadff0;
+
+            box-shadow: 0 8px 30px rgba(52, 19, 82, 0.07);
+
+            margin-bottom: 30px;
+        }
+
+
+        .address-card h2 {
+            color: #6e3482;
+
+            font-size: 22px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            color: #49225b;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #ddd3e2;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: #ffffff;
+
+            color: #49225b;
+
+            font-size: 15px;
+
+            transition: all 0.2s ease;
+        }
+
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #aaa0ae;
+        }
+
+
+        .form-group input:hover,
+        .form-group textarea:hover,
+        .form-group select:hover {
+            border-color: #c9b1d2;
+        }
+
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #6e3482;
+
+            box-shadow: 0 0 0 3px rgba(110, 52, 130, 0.08);
+        }
+
+
+        textarea {
+            resize: vertical;
+
+            min-height: 105px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           TWO COLUMN ROW
+        ===================================================== */
+
+        .row {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+        }
+
+
+        /* =====================================================
+           SAVE BUTTON
+        ===================================================== */
+
+        .save-btn {
+            width: 100%;
+
+            border: none;
+
+            background: #6e3482;
+
+            color: #ffffff;
+
+            padding: 14px 18px;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition: all 0.25s ease;
+        }
+
+
+        .save-btn:hover {
+            background: #49225b;
+
+            transform: translateY(-1px);
+
+            box-shadow: 0 7px 18px rgba(73, 34, 91, 0.2);
+        }
+
+
+        .save-btn:active {
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           SAVED ADDRESS SECTION
+        ===================================================== */
+
+        .saved-section {
+            margin-top: 15px;
+        }
+
+
+        .saved-title {
+            font-family: Georgia, "Times New Roman", serif;
+
+            color: #49225b;
+
+            font-size: 27px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =====================================================
+           SAVED ADDRESS CARD
+        ===================================================== */
+
+        .saved-address {
+            width: 100%;
+
+            background: #ffffff;
+
+            padding: 25px;
+
+            border-radius: 16px;
+
+            border: 1px solid #eadff0;
+
+            box-shadow: 0 7px 25px rgba(52, 19, 82, 0.06);
+
+            margin-bottom: 18px;
+
+            transition: all 0.25s ease;
+        }
+
+
+        .saved-address:hover {
+            transform: translateY(-2px);
+
+            box-shadow: 0 10px 28px rgba(52, 19, 82, 0.1);
+        }
+
+
+        /* =====================================================
+           ADDRESS TOP
+        ===================================================== */
+
+        .address-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .saved-address h3 {
+            color: #6e3482;
+
+            font-size: 19px;
+
+            font-weight: bold;
+        }
+
+
+        .address-label {
+            background: #eee3f3;
+
+            color: #6e3482;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           ADDRESS DETAILS
+        ===================================================== */
+
+        .address-details {
+            padding-top: 4px;
+        }
+
+
+        .saved-address p {
+            margin: 8px 0;
+
+            color: #555;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        .saved-address p strong {
+            color: #49225b;
+        }
+
+
+        .phone {
+            color: #6e3482 !important;
+
+            font-weight: 600;
+        }
+
+
+        .address-main {
+            color: #555 !important;
+
+            line-height: 1.7 !important;
+        }
+
+
+        /* =====================================================
+           ACTION BUTTONS
+        ===================================================== */
+
+        .actions {
+            margin-top: 20px;
+
+            padding-top: 17px;
+
+            border-top: 1px solid #eee5f1;
+
+            display: flex;
+
+            gap: 10px;
+        }
+
+
+        .edit-btn,
+        .delete-btn {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 9px 19px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            transition: all 0.2s ease;
+        }
+
+
+        .edit-btn {
+            background: #eee3f3;
+
+            color: #6e3482;
+        }
+
+
+        .edit-btn:hover {
+            background: #e2d1e9;
+
+            transform: translateY(-1px);
+        }
+
+
+        .delete-btn {
+            background: #ffe5e5;
+
+            color: #d33;
+        }
+
+
+        .delete-btn:hover {
+            background: #ffd2d2;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty {
+            width: 100%;
+
+            background: #ffffff;
+
+            padding: 50px 30px;
+
+            border-radius: 16px;
+
+            border: 1px solid #eadff0;
+
+            box-shadow: 0 7px 25px rgba(52, 19, 82, 0.06);
+
+            text-align: center;
+
+            color: #777;
+        }
+
+
+        .empty-icon {
+            font-size: 45px;
+
+            margin-bottom: 15px;
+
+            opacity: 0.65;
+        }
+
+
+        .empty h3 {
+            color: #49225b;
+
+            font-size: 20px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .empty p {
+            color: #999;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            background: #341352;
+
+            color: #ffffff;
+
+            padding: 35px 20px;
+
+            text-align: center;
+        }
+
+
+        footer h2 {
+            font-size: 22px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 9px;
+        }
+
+
+        footer p {
+            color: #e5d8e9;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE - 850px
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .navbar {
+                padding: 0 25px;
+            }
+
+
+            .nav-links {
+                gap: 16px;
+            }
+
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+
+            .container {
+                width: 92%;
+            }
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE - 650px
+        ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+
+                min-height: 70px;
+
+                padding: 15px 18px;
+
+                flex-wrap: wrap;
+
+                gap: 15px;
+            }
+
+
+            .logo {
+                font-size: 22px;
+            }
+
+
+            .nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+
+                gap: 12px;
+            }
+
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+
+            .container {
+                width: 94%;
+
+                margin-top: 28px;
+
+                margin-bottom: 45px;
+            }
+
+
+            .page-header {
+                display: block;
+            }
+
+
+            .title {
+                font-size: 28px;
+            }
+
+
+            .subtitle {
+                font-size: 13px;
+
+                margin-top: 6px;
+            }
+
+
+            .address-card {
+                padding: 22px;
+
+                border-radius: 15px;
+            }
+
+
+            .address-card h2 {
+                font-size: 20px;
+
+                margin-bottom: 20px;
+            }
+
+
+            .row {
+                grid-template-columns: 1fr;
+
+                gap: 0;
+            }
+
+
+            .saved-address {
+                padding: 20px;
+
+                border-radius: 14px;
+            }
+
+
+            .address-top {
+                align-items: flex-start;
+            }
+
+
+            .saved-title {
+                font-size: 24px;
+            }
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE - 450px
+        ===================================================== */
+
+        @media (max-width: 450px) {
+
+            .nav-links {
+                gap: 9px;
+            }
+
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+
+            .title {
+                font-size: 25px;
+            }
+
+
+            .address-card {
+                padding: 18px;
+            }
+
+
+            .saved-address {
+                padding: 18px;
+            }
+
+
+            .address-top {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+
+            .actions {
+                flex-direction: column;
+            }
+
+
+            .edit-btn,
+            .delete-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar">
+
+
+    <!-- LOGO -->
+
+    <a href="{% url 'home' %}" class="logo">
+        VastraHub
+    </a>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'men' %}">
+            Men
+        </a>
+
+        <a href="{% url 'women' %}">
+            Women
+        </a>
+
+        <a href="{% url 'kids' %}">
+            Kids
+        </a>
+
+        <a href="{% url 'cart' %}">
+            Cart
+        </a>
+
+        <a href="{% url 'profile' %}">
+            Profile
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="container">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h1 class="title">
+                My Address
+            </h1>
+
+            <p class="subtitle">
+                Manage your delivery addresses
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ADD NEW ADDRESS
+    ====================================================== -->
+
+    <div class="address-card">
+
+
+        <h2>
+            Add New Address
+        </h2>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+
+            <!-- =================================================
+                 FULL NAME
+            ================================================== -->
+
+            <div class="form-group">
+
+                <label for="full_name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="full_name"
+                    name="full_name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MOBILE NUMBER
+            ================================================== -->
+
+            <div class="form-group">
+
+                <label for="mobile">
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="mobile"
+                    name="mobile"
+                    placeholder="Enter 10 digit mobile number"
+                    maxlength="10"
+                    pattern="[0-9]{10}"
+                    inputmode="numeric"
+                    autocomplete="tel"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ADDRESS
+            ================================================== -->
+
+            <div class="form-group">
+
+                <label for="address">
+                    Address
+                </label>
+
+                <textarea
+                    id="address"
+                    name="address"
+                    placeholder="House no, Street, Area"
+                    autocomplete="street-address"
+                    required
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CITY + STATE
+            ================================================== -->
+
+            <div class="row">
+
+
+                <!-- CITY -->
+
+                <div class="form-group">
+
+                    <label for="city">
+                        City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        placeholder="Ahmedabad"
+                        autocomplete="address-level2"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- STATE -->
+
+                <div class="form-group">
+
+                    <label for="state">
+                        State
+                    </label>
+
+                    <input
+                        type="text"
+                        id="state"
+                        name="state"
+                        placeholder="Gujarat"
+                        autocomplete="address-level1"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PINCODE + LANDMARK
+            ================================================== -->
+
+            <div class="row">
+
+
+                <!-- PINCODE -->
+
+                <div class="form-group">
+
+                    <label for="pincode">
+                        Pincode
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pincode"
+                        name="pincode"
+                        placeholder="380001"
+                        maxlength="6"
+                        pattern="[0-9]{6}"
+                        inputmode="numeric"
+                        autocomplete="postal-code"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- LANDMARK -->
+
+                <div class="form-group">
+
+                    <label for="landmark">
+                        Landmark
+                    </label>
+
+                    <input
+                        type="text"
+                        id="landmark"
+                        name="landmark"
+                        placeholder="Near..."
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SAVE BUTTON
+            ================================================== -->
+
+            <button
+                type="submit"
+                class="save-btn"
+            >
+                Save Address
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SAVED ADDRESSES
+    ====================================================== -->
+
+    <section class="saved-section">
+
+
+        <h2 class="saved-title">
+            Saved Addresses
+        </h2>
+
+
+
+        {% if addresses %}
+
+
+            <!-- =================================================
+                 ADDRESS LOOP
+            ================================================== -->
+
+            {% for item in addresses %}
+
+
+                <div class="saved-address">
+
+
+                    <!-- ADDRESS HEADER -->
+
+                    <div class="address-top">
+
+                        <h3>
+                            {{ item.full_name }}
+                        </h3>
+
+                        <span class="address-label">
+                            DELIVERY ADDRESS
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- ADDRESS DETAILS -->
+
+                    <div class="address-details">
+
+
+                        <!-- MOBILE -->
+
+                        <p class="phone">
+                            📱 {{ item.mobile }}
+                        </p>
+
+
+
+                        <!-- ADDRESS -->
+
+                        <p class="address-main">
+                            📍 {{ item.address }}
+                        </p>
+
+
+
+                        <!-- CITY STATE PIN -->
+
+                        <p>
+                            <strong>
+                                {{ item.city }}
+                            </strong>,
+                            {{ item.state }}
+                            -
+                            {{ item.pincode }}
+                        </p>
+
+
+
+                        <!-- LANDMARK -->
+
+                        {% if item.landmark %}
+
+                            <p>
+                                <strong>
+                                    Landmark:
+                                </strong>
+
+                                {{ item.landmark }}
+                            </p>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="actions">
+
+
+                        <!-- EDIT -->
+
+                        <a
+                            href="{% url 'edit_address' item.id %}"
+                            class="edit-btn"
+                        >
+                            Edit
+                        </a>
+
+
+
+                        <!-- DELETE -->
+
+                        <a
+                            href="{% url 'delete_address' item.id %}"
+                            class="delete-btn"
+                            onclick="return confirm('Are you sure you want to delete this address?');"
+                        >
+                            Delete
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <!-- =================================================
+                 EMPTY
+            ================================================== -->
+
+            <div class="empty">
+
+
+                <div class="empty-icon">
+                    📍
+                </div>
+
+
+                <h3>
+                    No Saved Address
+                </h3>
+
+
+                <p>
+                    Add your first delivery address above.
+                </p>
+
+
+            </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <h2>
+        VastraHub
+    </h2>
+
+    <p>
+        Your fashion. Your style. Your identity.
+    </p>
+
+    <br>
+
+    <p>
+        © 2026 VastraHub. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

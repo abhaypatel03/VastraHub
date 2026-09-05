@@ -1,0 +1,1424 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VastraHub | Home</title>
+
+
+    <style>
+
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
+        :root {
+            --ink: #341352;
+            --muted: #8b7898;
+            --paper: #f8f1fb;
+            --surface: #ffffff;
+            --accent: #8d4aa5;
+            --accent-dark: #6d2c84;
+            --line: #eadff0;
+            --success: #39805d;
+            --image-bg: #f4edf7;
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: "Trebuchet MS", Arial, sans-serif;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+            width: 100%;
+            height: 76px;
+
+            background: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5vw;
+
+            border-bottom: 1px solid var(--line);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 1000;
+        }
+
+
+        /* =========================================================
+           LOGO
+        ========================================================= */
+
+        .logo {
+            font-family: Arial, sans-serif;
+
+            font-size: 34px;
+
+            font-weight: 900;
+
+            letter-spacing: 0;
+
+            color: #6e3482;
+
+            line-height: 1;
+
+            text-decoration: none;
+        }
+
+
+        .logo:hover {
+            color: #6e3482;
+        }
+
+
+        /* =========================================================
+           NAV LINKS
+        ========================================================= */
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+        }
+
+
+        .nav-links a {
+            color: var(--ink);
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition: 0.2s ease;
+        }
+
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+
+        .nav-links a:first-child {
+            color: var(--accent-dark);
+        }
+
+
+        /* =========================================================
+           NAV ACTIONS
+        ========================================================= */
+
+        .nav-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+        }
+
+
+        .nav-btn {
+            width: 24px;
+            height: 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: var(--ink);
+
+            transition: 0.2s ease;
+        }
+
+
+        .nav-btn:hover {
+            color: var(--accent);
+
+            transform: translateY(-1px);
+        }
+
+
+        .nav-btn svg {
+            width: 21px;
+            height: 21px;
+
+            fill: none;
+
+            stroke: currentColor;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        /* =========================================================
+           SEARCH
+        ========================================================= */
+
+        .search-box {
+            width: 100%;
+
+            padding: 25px 5vw 8px;
+
+            background: var(--paper);
+        }
+
+
+        .search-form {
+            width: 100%;
+
+            max-width: 760px;
+
+            margin: auto;
+
+            display: flex;
+        }
+
+
+        .search-form input {
+            flex: 1;
+
+            min-width: 0;
+
+            padding: 13px 18px;
+
+            border: 1px solid var(--line);
+
+            border-right: none;
+
+            border-radius: 5px 0 0 5px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            background: #ffffff;
+
+            color: var(--ink);
+        }
+
+
+        .search-form input::placeholder {
+            color: #aa9aae;
+        }
+
+
+        .search-form input:focus {
+            border-color: var(--accent);
+        }
+
+
+        .search-form button {
+            padding: 13px 25px;
+
+            border: none;
+
+            background: var(--accent);
+
+            color: #ffffff;
+
+            border-radius: 0 5px 5px 0;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            letter-spacing: 0.5px;
+
+            transition: 0.2s ease;
+        }
+
+
+        .search-form button:hover {
+            background: var(--accent-dark);
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 270px;
+
+            margin: 20px 4.5vw 34px;
+
+            padding: 40px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    105deg,
+                    #50245f 0%,
+                    #9a68a8 100%
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .hero-content {
+            max-width: 610px;
+        }
+
+
+        .hero-small {
+            color: #f1dff6;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .hero h1 {
+            margin: 0 0 18px;
+
+            color: #ffffff;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 40px;
+
+            line-height: 1.1;
+
+            font-weight: 800;
+        }
+
+
+        .hero p {
+            margin: 0 0 18px;
+
+            color: #f6edf8;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+        }
+
+
+        .shop-btn {
+            display: inline-block;
+
+            padding: 15px 24px;
+
+            background: #ffffff;
+
+            color: var(--accent-dark);
+
+            border-radius: 5px;
+
+            font-weight: bold;
+
+            transition: 0.3s ease;
+        }
+
+
+        .shop-btn:hover {
+            background: var(--accent);
+
+            color: #ffffff;
+        }
+
+
+        /* =========================================================
+           HERO DESIGN
+        ========================================================= */
+
+        .hero-design {
+            width: 250px;
+
+            height: 250px;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 90px;
+        }
+
+
+        /* =========================================================
+           SECTION
+        ========================================================= */
+
+        .section {
+            padding: 25px 5vw;
+        }
+
+
+        .section-title {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+
+        .section-title h2 {
+            margin: 0;
+
+            color: var(--ink);
+
+            font-family: Georgia, serif;
+
+            font-size: 30px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           CATEGORY GRID
+        ========================================================= */
+
+        .categories {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 16px;
+        }
+
+
+        /* =========================================================
+           CATEGORY CARD
+        ========================================================= */
+
+        .category-card {
+            background: var(--surface);
+
+            border: 1px solid var(--line);
+
+            border-radius: 8px;
+
+            padding: 30px 22px;
+
+            text-align: center;
+
+            color: var(--ink);
+
+            box-shadow:
+                0 8px 24px rgba(23, 37, 43, 0.05);
+
+            transition: 0.3s ease;
+        }
+
+
+        .category-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 28px rgba(23, 37, 43, 0.12);
+        }
+
+
+        .category-icon {
+            width: 70px;
+
+            height: 70px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #f3e7f7;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 38px;
+        }
+
+
+        .category-card h3 {
+            margin-bottom: 7px;
+
+            font-family: Georgia, serif;
+
+            font-size: 21px;
+        }
+
+
+        .category-card p {
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           PRODUCT GRID
+        ========================================================= */
+
+        .product-grid {
+            display: grid;
+
+            grid-template-columns: repeat(5, 1fr);
+
+            gap: 16px;
+
+            align-items: stretch;
+        }
+
+
+        /* =========================================================
+           PRODUCT CARD
+        ========================================================= */
+
+        .product-card {
+            min-width: 0;
+
+            background: var(--surface);
+
+            border: 1px solid var(--line);
+
+            border-radius: 8px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 22px rgba(23, 37, 43, 0.05);
+
+            transition: 0.3s ease;
+        }
+
+
+        .product-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 28px rgba(0, 0, 0, 0.12);
+
+            border-color: #d7bddf;
+        }
+
+
+        /* =========================================================
+           PRODUCT IMAGE
+           
+           IMPORTANT:
+           contain use kiya hai.
+           Isse image crop nahi hogi.
+        ========================================================= */
+
+        .product-image {
+            width: 100%;
+
+            height: 300px;
+
+            overflow: hidden;
+
+            background: var(--image-bg);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .product-image img {
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: contain;
+
+            object-position: center;
+
+            transition: transform 0.35s ease;
+        }
+
+
+        .product-card:hover
+        .product-image img {
+            transform: scale(1.02);
+        }
+
+
+        /* =========================================================
+           NO IMAGE
+        ========================================================= */
+
+        .no-image {
+            width: 100%;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           PRODUCT INFO
+        ========================================================= */
+
+        .product-info {
+            min-height: 132px;
+
+            padding: 14px;
+        }
+
+
+        .product-name {
+            margin-bottom: 8px;
+
+            color: var(--ink);
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .product-brand {
+            margin-bottom: 8px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           PRICE
+        ========================================================= */
+
+        .price {
+            color: var(--accent-dark);
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        .discount {
+            margin-left: 5px;
+
+            color: var(--success);
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           VIEW BUTTON
+        ========================================================= */
+
+        .view-btn {
+            display: block;
+
+            width: 100%;
+
+            margin-top: 12px;
+
+            padding: 10px;
+
+            background: var(--ink);
+
+            color: #ffffff;
+
+            border-radius: 5px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.2s ease;
+        }
+
+
+        .view-btn:hover {
+            background: var(--accent);
+
+            color: #ffffff;
+        }
+
+
+        /* =========================================================
+           EMPTY PRODUCTS
+        ========================================================= */
+
+        .empty-products {
+            grid-column: 1 / -1;
+
+            padding: 50px 20px;
+
+            background: #ffffff;
+
+            border: 1px solid var(--line);
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 16px;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            margin-top: 50px;
+
+            padding: 35px 45px;
+
+            background: var(--ink);
+
+            color: #ffffff;
+
+            text-align: center;
+        }
+
+
+        footer h2 {
+            margin-bottom: 10px;
+
+            font-size: 25px;
+        }
+
+
+        footer p {
+            color: #e5d8e9;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 1100px) {
+
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                padding: 0 25px;
+            }
+
+
+            .nav-links {
+                gap: 16px;
+            }
+
+
+            .hero {
+                margin-left: 25px;
+
+                margin-right: 25px;
+
+                padding: 35px;
+            }
+
+
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+
+            .section {
+                padding-left: 25px;
+
+                padding-right: 25px;
+            }
+
+
+            .search-box {
+                padding-left: 25px;
+
+                padding-right: 25px;
+            }
+
+
+            .product-image {
+                height: 280px;
+            }
+
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+
+                padding: 16px;
+
+                flex-wrap: wrap;
+
+                gap: 18px;
+            }
+
+
+            .logo {
+                font-size: 30px;
+            }
+
+
+            .nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                gap: 15px;
+
+                flex-wrap: wrap;
+
+                order: 3;
+            }
+
+
+            .nav-actions {
+                gap: 14px;
+            }
+
+
+            .search-box {
+                padding: 18px 16px 5px;
+            }
+
+
+            .search-form input {
+                padding: 12px;
+            }
+
+
+            .search-form button {
+                padding: 12px 16px;
+            }
+
+
+            .hero {
+                margin: 18px 16px 25px;
+
+                padding: 30px 22px;
+
+                min-height: auto;
+
+                text-align: center;
+            }
+
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+
+            .hero p {
+                font-size: 15px;
+            }
+
+
+            .section {
+                padding: 20px 16px;
+            }
+
+
+            .section-title h2 {
+                font-size: 25px;
+            }
+
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+
+                gap: 12px;
+            }
+
+
+            .product-image {
+                height: 240px;
+            }
+
+
+            .product-info {
+                padding: 11px;
+            }
+
+
+            .product-name {
+                font-size: 14px;
+            }
+
+
+            .price {
+                font-size: 16px;
+            }
+
+
+            .discount {
+                font-size: 11px;
+            }
+
+
+            .view-btn {
+                font-size: 12px;
+
+                padding: 9px;
+            }
+
+
+            footer {
+                padding: 30px 20px;
+            }
+
+        }
+
+
+        /* =========================================================
+           SMALL MOBILE
+        ========================================================= */
+
+        @media (max-width: 420px) {
+
+            .logo {
+                font-size: 27px;
+            }
+
+
+            .nav-links {
+                gap: 11px;
+            }
+
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+
+            .nav-actions {
+                gap: 9px;
+            }
+
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+
+            .product-image {
+                height: 220px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="navbar">
+
+
+    <!-- LOGO -->
+
+    <a
+        href="{% url 'home' %}"
+        class="logo"
+    >
+        VastraHub
+    </a>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+
+        <a href="{% url 'men' %}">
+            Men
+        </a>
+
+
+        <a href="{% url 'women' %}">
+            Women
+        </a>
+
+
+        <a href="{% url 'kids' %}">
+            Kids
+        </a>
+
+
+        <a href="{% url 'offers' %}">
+            Offers
+        </a>
+
+    </nav>
+
+
+    <!-- NAV ICONS -->
+
+    <div class="nav-actions">
+
+
+        <!-- WISHLIST -->
+
+        <a
+            href="{% url 'wishlist' %}"
+            class="nav-btn"
+            title="Wishlist"
+        >
+
+            <svg viewBox="0 0 24 24">
+
+                <path
+                    d="M20.8 8.7c0 5.5-8.8 10.3-8.8 10.3S3.2 14.2 3.2 8.7A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z"
+                />
+
+            </svg>
+
+        </a>
+
+
+        <!-- CART -->
+
+        <a
+            href="{% url 'cart' %}"
+            class="nav-btn"
+            title="Cart"
+        >
+
+            <svg viewBox="0 0 24 24">
+
+                <path
+                    d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 1.9-1.4L20 8H6"
+                />
+
+                <circle
+                    cx="10"
+                    cy="20"
+                    r="1"
+                />
+
+                <circle
+                    cx="18"
+                    cy="20"
+                    r="1"
+                />
+
+            </svg>
+
+        </a>
+
+
+        <!-- PROFILE -->
+
+        <a
+            href="{% url 'profile' %}"
+            class="nav-btn"
+            title="Profile"
+        >
+
+            <svg viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="3.2"
+                />
+
+                <path
+                    d="M5.5 20c.7-3.5 2.9-5.2 6.5-5.2s5.8 1.7 6.5 5.2"
+                />
+
+            </svg>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     SEARCH
+========================================================= -->
+
+<div class="search-box">
+
+    <form
+        method="GET"
+        action="{% url 'home' %}"
+        class="search-form"
+    >
+
+        <input
+            type="text"
+            name="search"
+            value="{{ search }}"
+            placeholder="Search products, brands..."
+        >
+
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+</div>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+
+    <div class="hero-content">
+
+
+        <div class="hero-small">
+            NEW COLLECTION 2026
+        </div>
+
+
+        <h1>
+            Discover Your<br>
+            Signature Style.
+        </h1>
+
+
+        <p>
+            Discover the latest fashion for Men,
+            Women and Kids.
+        </p>
+
+
+        <a
+            href="{% url 'men' %}"
+            class="shop-btn"
+        >
+            Shop Now
+        </a>
+
+
+    </div>
+
+
+    <div class="hero-design">
+        👕
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     CATEGORIES
+========================================================= -->
+
+
+
+
+
+<!-- =========================================================
+     LATEST PRODUCTS
+========================================================= -->
+
+<section class="section">
+
+
+    <div class="section-title">
+
+        <h2>
+            Latest Products
+        </h2>
+
+    </div>
+
+
+
+    <div class="product-grid">
+
+
+        {% for product in products %}
+
+
+        <!-- PRODUCT CARD -->
+
+        <div class="product-card">
+
+
+            <!-- PRODUCT IMAGE -->
+
+            <a
+                href="{% url 'product_detail' product.id %}"
+            >
+
+                <div class="product-image">
+
+
+                    {% if product.image %}
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                    {% else %}
+
+                        <div class="no-image">
+                            No Image
+                        </div>
+
+                    {% endif %}
+
+
+                </div>
+
+            </a>
+
+
+
+            <!-- PRODUCT INFORMATION -->
+
+            <div class="product-info">
+
+
+                <div class="product-name">
+                    {{ product.name }}
+                </div>
+
+
+
+                {% if product.brand %}
+
+                    <div class="product-brand">
+                        {{ product.brand }}
+                    </div>
+
+                {% endif %}
+
+
+
+                <div>
+
+                    <span class="price">
+                        ₹{{ product.price }}
+                    </span>
+
+
+                    {% if product.discount %}
+
+                        <span class="discount">
+                            {{ product.discount }}% OFF
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <a
+                    href="{% url 'product_detail' product.id %}"
+                    class="view-btn"
+                >
+                    View Product
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+        {% empty %}
+
+
+            <div class="empty-products">
+                No products found.
+            </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+
+    <h2>
+        VastraHub
+    </h2>
+
+
+    <p>
+        Your fashion. Your style. Your identity.
+    </p>
+
+
+    <br>
+
+
+    <p>
+        © 2026 VastraHub. All Rights Reserved.
+    </p>
+
+
+</footer>
+
+
+</body>
+
+</html>

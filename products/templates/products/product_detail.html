@@ -1,0 +1,1309 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product.name }} | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5ebfa;
+            color: #49225b;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: white;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 3px 15px rgba(73,34,91,0.10);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #6e3482;
+            text-decoration: none;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a,
+        .nav-icons a {
+            text-decoration: none;
+            color: #49225b;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #9b59b6;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 18px;
+        }
+
+        .nav-icons a {
+            font-size: 21px;
+        }
+
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 22px;
+            color: #6e3482;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+        /* ================= PRODUCT ================= */
+
+        .product-box {
+            background: white;
+            border-radius: 22px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            box-shadow: 0 8px 30px rgba(73,34,91,0.10);
+        }
+
+
+        /* ================= IMAGE ================= */
+
+        .image-box {
+            position: relative;
+            height: 560px;
+            background: #f8f3fa;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .sale {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+
+        /* ================= THUMBNAILS ================= */
+
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            overflow-x: auto;
+        }
+
+        .thumbnail {
+            width: 75px;
+            height: 85px;
+            border: 2px solid transparent;
+            border-radius: 9px;
+            overflow: hidden;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .thumbnail.active {
+            border-color: #6e3482;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        /* ================= INFO ================= */
+
+        .brand {
+            color: #9b59b6;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-size: 34px;
+            line-height: 1.25;
+            color: #49225b;
+            margin-bottom: 15px;
+        }
+
+
+        /* ================= RATING ================= */
+
+        .rating-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f1e7f5;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: #f39c12;
+        }
+
+        .reviews {
+            color: #765582;
+            font-size: 13px;
+        }
+
+
+        /* ================= PRICE ================= */
+
+        .price-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            color: #6e3482;
+            font-size: 31px;
+            font-weight: bold;
+        }
+
+        .mrp {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 17px;
+        }
+
+        .discount {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+
+        /* ================= DESCRIPTION ================= */
+
+        .description {
+            color: #765582;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .line {
+            height: 1px;
+            background: #eee;
+            margin: 22px 0;
+        }
+
+
+        /* ================= SIZE ================= */
+
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .sizes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .size {
+            min-width: 55px;
+            padding: 11px 15px;
+            background: white;
+            color: #49225b;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .size:hover,
+        .size.selected {
+            background: #6e3482;
+            color: white;
+            border-color: #6e3482;
+        }
+
+
+        /* ================= QUANTITY ================= */
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #f5ebfa;
+            color: #6e3482;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .qty-number {
+            width: 45px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+        /* ================= STOCK ================= */
+
+        .stock {
+            margin-bottom: 18px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .out-stock {
+            color: #e74c3c;
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn {
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .cart-btn {
+            background: #6e3482;
+            color: white;
+        }
+
+        .cart-btn:hover {
+            background: #49225b;
+        }
+
+        .buy-btn {
+            background: #49225b;
+            color: white;
+        }
+
+        .buy-btn:hover {
+            background: #6e3482;
+        }
+
+        .wishlist-btn {
+            width: 100%;
+            margin-top: 12px;
+            background: white;
+            color: #6e3482;
+            border: 1px solid #6e3482;
+        }
+
+        .wishlist-btn:hover {
+            background: #f5ebfa;
+        }
+
+
+        /* ================= ALL PRODUCT DETAILS ================= */
+
+        .details-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .detail-card {
+            background: #faf7fc;
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        .detail-label {
+            display: block;
+            color: #999;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #49225b;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode {
+            background: #18121d;
+            color: #f4eafa;
+        }
+
+        body.dark-mode .navbar,
+        body.dark-mode .product-box {
+            background: #241b2a;
+        }
+
+        body.dark-mode .logo,
+        body.dark-mode .nav-links a,
+        body.dark-mode .nav-icons a,
+        body.dark-mode .product-name,
+        body.dark-mode .title,
+        body.dark-mode .details-title,
+        body.dark-mode .detail-value {
+            color: #f0dafa;
+        }
+
+        body.dark-mode .description,
+        body.dark-mode .reviews {
+            color: #c5adcf;
+        }
+
+        body.dark-mode .image-box,
+        body.dark-mode .detail-card {
+            background: #18121d;
+        }
+
+        body.dark-mode .line {
+            background: #3c3043;
+        }
+
+        body.dark-mode .size {
+            background: #241b2a;
+            color: #f0dafa;
+            border-color: #4b3b52;
+        }
+
+        body.dark-mode .size.selected {
+            background: #6e3482;
+            color: white;
+        }
+
+        body.dark-mode .wishlist-btn {
+            background: #241b2a;
+        }
+
+
+        /* ================= TABLET ================= */
+
+        @media (max-width: 900px) {
+
+            .product-box {
+                grid-template-columns: 1fr;
+            }
+
+            .image-box {
+                height: 500px;
+            }
+
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 4%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-icons {
+                gap: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .product-box {
+                padding: 17px;
+                gap: 25px;
+            }
+
+            .image-box {
+                height: 390px;
+            }
+
+            .product-name {
+                font-size: 26px;
+            }
+
+            .price {
+                font-size: 27px;
+            }
+
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        VastraHub
+    </a>
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'men' %}">Men</a>
+        <a href="{% url 'women' %}">Women</a>
+        <a href="{% url 'kids' %}">Kids</a>
+
+    </div>
+
+    <div class="nav-icons">
+
+        <a href="{% url 'wishlist' %}">♡</a>
+        <a href="{% url 'cart' %}">🛒</a>
+        <a href="{% url 'profile' %}">👤</a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+    <a href="javascript:history.back()" class="back">
+        ← Back
+    </a>
+
+
+    <div class="product-box">
+
+
+        <!-- ================= LEFT IMAGE ================= -->
+
+        <div>
+
+            <div class="image-box">
+
+                {% if product.discount and product.discount > 0 %}
+
+                    <div class="sale">
+                        {{ product.discount }}% OFF
+                    </div>
+
+                {% endif %}
+
+
+                {% if product.image %}
+
+                    <img
+                        id="mainImage"
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        class="main-image"
+                    >
+
+                {% else %}
+
+                    <img
+                        src="{% static 'products/images/no-image.png' %}"
+                        class="main-image"
+                        alt="No Image"
+                    >
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- EXTRA IMAGES -->
+
+            <div class="thumbnails">
+
+                {% if product.image %}
+
+                    <div
+                        class="thumbnail active"
+                        onclick="changeImage('{{ product.image.url }}', this)"
+                    >
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                    </div>
+
+                {% endif %}
+
+
+                {% for extra in extra_images %}
+
+                    <div
+                        class="thumbnail"
+                        onclick="changeImage('{{ extra.image.url }}', this)"
+                    >
+
+                        <img
+                            src="{{ extra.image.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= RIGHT INFO ================= -->
+
+        <div>
+
+
+            {% if product.brand %}
+
+                <div class="brand">
+                    {{ product.brand }}
+                </div>
+
+            {% endif %}
+
+
+            <h1 class="product-name">
+                {{ product.name }}
+            </h1>
+
+
+            <!-- RATING -->
+
+            <div class="rating-box">
+
+                <span class="stars">
+                    ★★★★★
+                </span>
+
+                <span class="reviews">
+
+                    {{ product.rating|default:"0" }}
+                    ({{ product.reviews_count|default:"0" }} Reviews)
+
+                </span>
+
+            </div>
+
+
+            <!-- PRICE -->
+
+            <div class="price-box">
+
+                <span class="price">
+                    ₹{{ product.price }}
+                </span>
+
+
+                {% if product.mrp %}
+
+                    <span class="mrp">
+                        ₹{{ product.mrp }}
+                    </span>
+
+                {% endif %}
+
+
+                {% if product.discount and product.discount > 0 %}
+
+                    <span class="discount">
+                        {{ product.discount }}% OFF
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            {% if product.description %}
+
+                <p class="description">
+                    {{ product.description }}
+                </p>
+
+            {% endif %}
+
+
+            <div class="line"></div>
+
+
+            <!-- SIZE -->
+
+            <div class="title">
+                Select Size
+            </div>
+
+            <div class="sizes">
+
+                {% if sizes %}
+
+                    {% for size in sizes %}
+
+                        <button
+                            type="button"
+                            class="size {% if forloop.first %}selected{% endif %}"
+                            onclick="selectSize(this, '{{ size }}')"
+                        >
+                            {{ size }}
+                        </button>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <button
+                        type="button"
+                        class="size selected"
+                        onclick="selectSize(this, 'Free Size')"
+                    >
+                        Free Size
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- QUANTITY -->
+
+            <div class="quantity">
+
+                <div class="title">
+                    Quantity
+                </div>
+
+                <div class="qty-control">
+
+                    <button
+                        type="button"
+                        class="qty-btn"
+                        onclick="minusQuantity()"
+                    >
+                        −
+                    </button>
+
+                    <div
+                        id="quantity"
+                        class="qty-number"
+                    >
+                        1
+                    </div>
+
+                    <button
+                        type="button"
+                        class="qty-btn"
+                        onclick="plusQuantity()"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- STOCK -->
+
+            {% if product.stock > 0 %}
+
+                <div class="stock">
+                    ✓ {{ product.stock }} items available
+                </div>
+
+            {% else %}
+
+                <div class="stock out-stock">
+                    ✕ Out of Stock
+                </div>
+
+            {% endif %}
+
+
+            <!-- ================= CART ================= -->
+
+            <form
+                method="POST"
+                action="{% url 'add_to_cart' product.id %}"
+                id="cartForm"
+            >
+
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="size"
+                    id="selectedSize"
+                    value="Free Size"
+                >
+
+                <input
+                    type="hidden"
+                    name="quantity"
+                    id="selectedQuantity"
+                    value="1"
+                >
+
+
+                <div class="buttons">
+
+                    <button
+                        type="submit"
+                        class="btn cart-btn"
+                        {% if product.stock <= 0 %}disabled{% endif %}
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        name="buy_now"
+                        value="1"
+                        class="btn buy-btn"
+                        {% if product.stock <= 0 %}disabled{% endif %}
+                    >
+                        ⚡ Buy Now
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- ================= WISHLIST ================= -->
+
+            <form
+                method="POST"
+                action="{% url 'add_to_wishlist' product.id %}"
+            >
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="btn wishlist-btn"
+                >
+                    ♡ Add to Wishlist
+                </button>
+
+            </form>
+
+
+            <div class="line"></div>
+
+
+            <!-- ================= ALL DETAILS ================= -->
+
+            <h2 class="details-title">
+                Product Details
+            </h2>
+
+
+            <div class="details-grid">
+
+
+                <!-- NAME -->
+
+                <div class="detail-card">
+
+                    <span class="detail-label">
+                        Product Name
+                    </span>
+
+                    <span class="detail-value">
+                        {{ product.name }}
+                    </span>
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                {% if product.category %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            Category
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.get_category_display }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- BRAND -->
+
+                {% if product.brand %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            Brand
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.brand }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- COLOR -->
+
+                {% if product.color %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            Color
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.color }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- FABRIC -->
+
+                {% if product.fabric %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            Fabric
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.fabric }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- SIZE -->
+
+                {% if product.size %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            Available Sizes
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.size }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- FIT -->
+
+                {% if product.fit %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            Fit
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.get_fit_display }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- PATTERN -->
+
+                {% if product.pattern %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            Pattern
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.pattern }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- SLEEVE -->
+
+                {% if product.sleeve %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            Sleeve
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.sleeve }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- OCCASION -->
+
+                {% if product.occasion %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            Occasion
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.occasion }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- SKU -->
+
+                {% if product.sku %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            SKU
+                        </span>
+
+                        <span class="detail-value">
+                            {{ product.sku }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- STOCK -->
+
+                <div class="detail-card">
+
+                    <span class="detail-label">
+                        Stock
+                    </span>
+
+                    <span class="detail-value">
+                        {{ product.stock }}
+                    </span>
+
+                </div>
+
+
+                <!-- RATING -->
+
+                <div class="detail-card">
+
+                    <span class="detail-label">
+                        Rating
+                    </span>
+
+                    <span class="detail-value">
+                        {{ product.rating|default:"0" }} / 5
+                    </span>
+
+                </div>
+
+
+                <!-- REVIEWS -->
+
+                <div class="detail-card">
+
+                    <span class="detail-label">
+                        Reviews
+                    </span>
+
+                    <span class="detail-value">
+                        {{ product.reviews_count|default:"0" }}
+                    </span>
+
+                </div>
+
+
+                <!-- MRP -->
+
+                {% if product.mrp %}
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            MRP
+                        </span>
+
+                        <span class="detail-value">
+                            ₹{{ product.mrp }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- DISCOUNT -->
+
+                <div class="detail-card">
+
+                    <span class="detail-label">
+                        Discount
+                    </span>
+
+                    <span class="detail-value">
+                        {{ product.discount|default:"0" }}%
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    let selectedSize = "Free Size";
+
+    let quantity = 1;
+
+
+    /* IMAGE */
+
+    function changeImage(url, element) {
+
+        document.getElementById("mainImage").src = url;
+
+        document
+            .querySelectorAll(".thumbnail")
+            .forEach(function(item) {
+
+                item.classList.remove("active");
+
+            });
+
+        element.classList.add("active");
+
+    }
+
+
+    /* SIZE */
+
+    function selectSize(button, size) {
+
+        selectedSize = size;
+
+        document.getElementById("selectedSize").value = size;
+
+        document
+            .querySelectorAll(".size")
+            .forEach(function(item) {
+
+                item.classList.remove("selected");
+
+            });
+
+        button.classList.add("selected");
+
+    }
+
+
+    /* PLUS */
+
+    function plusQuantity() {
+
+        const maxStock =
+            parseInt("{{ product.stock|default:'1' }}");
+
+        if (quantity < maxStock) {
+
+            quantity++;
+
+            document.getElementById("quantity").innerText = quantity;
+
+            document.getElementById("selectedQuantity").value = quantity;
+
+        }
+
+    }
+
+
+    /* MINUS */
+
+    function minusQuantity() {
+
+        if (quantity > 1) {
+
+            quantity--;
+
+            document.getElementById("quantity").innerText = quantity;
+
+            document.getElementById("selectedQuantity").value = quantity;
+
+        }
+
+    }
+
+
+    /* FORM */
+
+    document
+        .getElementById("cartForm")
+        .addEventListener("submit", function() {
+
+            document.getElementById("selectedSize").value =
+                selectedSize;
+
+            document.getElementById("selectedQuantity").value =
+                quantity;
+
+        });
+
+</script>
+
+
+<script src="{% static 'products/js/theme.js' %}"></script>
+
+
+</body>
+
+</html>

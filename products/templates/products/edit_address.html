@@ -1,0 +1,475 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Address | VastraHub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f1fa;
+            color: #49225b;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #eadfed;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .logo {
+            color: #6e3482;
+            text-decoration: none;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #5b4663;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #6e3482;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 850px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #6e3482;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #eadfed;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(73, 34, 91, 0.08);
+        }
+
+        h1 {
+            color: #3e194d;
+            margin-bottom: 8px;
+            font-size: 30px;
+        }
+
+        .subtitle {
+            color: #77677d;
+            margin-bottom: 30px;
+        }
+
+        /* FORM */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #4d3955;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d9c9df;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            background: white;
+            color: #39233f;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #6e3482;
+            box-shadow: 0 0 0 3px rgba(110, 52, 130, 0.1);
+        }
+
+        .default-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .default-box input {
+            width: auto;
+        }
+
+        .default-box label {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* BUTTONS */
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .cancel-btn,
+        .save-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background: #f1e8f4;
+            color: #5e3a69;
+        }
+
+        .save-btn {
+            background: #6e3482;
+            color: white;
+            border: none;
+        }
+
+        .save-btn:hover {
+            background: #582867;
+        }
+
+        /* MOBILE */
+        @media (max-width: 650px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+
+            .card {
+                padding: 25px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+
+        /* DARK MODE */
+        body.dark-mode {
+            background: #17121b;
+            color: #f5edf8;
+        }
+
+        body.dark-mode .navbar,
+        body.dark-mode .card {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .nav-links a:hover,
+        body.dark-mode .back {
+            color: #d18ae8;
+        }
+
+        body.dark-mode h1 {
+            color: white;
+        }
+
+        body.dark-mode .subtitle,
+        body.dark-mode label {
+            color: #bcaec2;
+        }
+
+        body.dark-mode input,
+        body.dark-mode select,
+        body.dark-mode textarea {
+            background: #2a1e30;
+            color: white;
+            border-color: #4a3851;
+        }
+
+        body.dark-mode .cancel-btn {
+            background: #35233d;
+            color: #e0cfe5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            VastraHub
+        </a>
+
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'men' %}">Men</a>
+            <a href="{% url 'women' %}">Women</a>
+            <a href="{% url 'kids' %}">Kids</a>
+            <a href="{% url 'profile' %}">Profile</a>
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <a href="{% url 'address' %}" class="back">
+            ← Back to Address
+        </a>
+
+        <div class="card">
+
+            <h1>Edit Address</h1>
+
+            <p class="subtitle">
+                Update your delivery address details.
+            </p>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-grid">
+
+                    <!-- NAME -->
+                    <div class="form-group">
+                        <label>Full Name</label>
+
+                        <input
+                            type="text"
+                            name="full_name"
+                            value="{{ address.full_name }}"
+                            placeholder="Enter full name"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- PHONE -->
+                    <div class="form-group">
+                        <label>Phone Number</label>
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            value="{{ address.phone }}"
+                            placeholder="Enter phone number"
+                            maxlength="10"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- ADDRESS TYPE -->
+                    <div class="form-group">
+
+                        <label>Address Type</label>
+
+                        <select name="address_type">
+
+                            <option value="home"
+                                {% if address.address_type == "home" %}selected{% endif %}>
+                                Home
+                            </option>
+
+                            <option value="work"
+                                {% if address.address_type == "work" %}selected{% endif %}>
+                                Work
+                            </option>
+
+                            <option value="other"
+                                {% if address.address_type == "other" %}selected{% endif %}>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PINCODE -->
+                    <div class="form-group">
+
+                        <label>Pincode</label>
+
+                        <input
+                            type="text"
+                            name="pincode"
+                            value="{{ address.pincode }}"
+                            placeholder="Enter pincode"
+                            maxlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+                    <div class="form-group full">
+
+                        <label>Address</label>
+
+                        <textarea
+                            name="address_line"
+                            placeholder="House No, Street, Area"
+                            required
+                        >{{ address.address_line }}</textarea>
+
+                    </div>
+
+
+                    <!-- CITY -->
+                    <div class="form-group">
+
+                        <label>City</label>
+
+                        <input
+                            type="text"
+                            name="city"
+                            value="{{ address.city }}"
+                            placeholder="Enter city"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- STATE -->
+                    <div class="form-group">
+
+                        <label>State</label>
+
+                        <input
+                            type="text"
+                            name="state"
+                            value="{{ address.state }}"
+                            placeholder="Enter state"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DEFAULT -->
+                    <div class="form-group full">
+
+                        <div class="default-box">
+
+                            <input
+                                type="checkbox"
+                                name="is_default"
+                                id="is_default"
+                                {% if address.is_default %}checked{% endif %}
+                            >
+
+                            <label for="is_default">
+                                Make this my default address
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+                <div class="buttons">
+
+                    <a href="{% url 'address' %}" class="cancel-btn">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="save-btn">
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- THEME JS -->
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+</body>
+</html>

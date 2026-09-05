@@ -1,0 +1,789 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Updates | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f1fa;
+            color: #49225b;
+            min-height: 100vh;
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #eadfed;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #6e3482;
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .back-btn {
+            color: #49225b;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .back-btn:hover {
+            color: #6e3482;
+        }
+
+
+        /* MAIN */
+
+        .container {
+            max-width: 850px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #3e194d;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #817187;
+            font-size: 14px;
+        }
+
+
+        /* CARD */
+
+        .card {
+            background: white;
+            border: 1px solid #eadfed;
+            border-radius: 18px;
+            padding: 25px;
+
+            box-shadow:
+                0 10px 30px rgba(73, 34, 91, 0.08);
+
+            margin-bottom: 18px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 12px;
+
+            background: #eee1f3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+        }
+
+        .card-title h2 {
+            font-size: 18px;
+            color: #3e194d;
+        }
+
+        .card-title p {
+            font-size: 12px;
+            color: #817187;
+            margin-top: 4px;
+        }
+
+
+        /* TOGGLE */
+
+        .toggle {
+            position: relative;
+            width: 52px;
+            height: 28px;
+        }
+
+        .toggle input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+
+            background: #d7ccd9;
+
+            border-radius: 30px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .slider::before {
+            content: "";
+
+            position: absolute;
+
+            width: 22px;
+            height: 22px;
+
+            left: 3px;
+            top: 3px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            transition: 0.3s;
+        }
+
+        .toggle input:checked + .slider {
+            background: #6e3482;
+        }
+
+        .toggle input:checked + .slider::before {
+            transform: translateX(24px);
+        }
+
+
+        /* INFO */
+
+        .info {
+            background: #faf6fc;
+            border-radius: 12px;
+            padding: 15px;
+
+            color: #817187;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+
+        /* ORDER TYPES */
+
+        .option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 17px 0;
+
+            border-bottom: 1px solid #eadfed;
+        }
+
+        .option:last-child {
+            border-bottom: none;
+        }
+
+        .option-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .option-icon {
+            width: 42px;
+            height: 42px;
+
+            background: #f1e6f5;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+        .option-text h3 {
+            font-size: 14px;
+            color: #49225b;
+        }
+
+        .option-text p {
+            font-size: 11px;
+            color: #817187;
+            margin-top: 4px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #49225b;
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+
+            margin-top: 60px;
+        }
+
+        footer h2 {
+            font-size: 21px;
+            margin-bottom: 6px;
+        }
+
+        footer p {
+            color: #d8c9dd;
+            font-size: 12px;
+        }
+
+
+        /* DARK MODE */
+
+        body.dark-mode {
+            background: #17121b;
+            color: white;
+        }
+
+        body.dark-mode .navbar {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .back-btn {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .header h1 {
+            color: white;
+        }
+
+        body.dark-mode .header p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .card {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .card-title h2 {
+            color: white;
+        }
+
+        body.dark-mode .card-title p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .icon {
+            background: #34253b;
+        }
+
+        body.dark-mode .info {
+            background: #2a1e30;
+            color: #bcaec2;
+        }
+
+        body.dark-mode .option {
+            border-color: #44334b;
+        }
+
+        body.dark-mode .option-icon {
+            background: #34253b;
+        }
+
+        body.dark-mode .option-text h3 {
+            color: white;
+        }
+
+        body.dark-mode .option-text p {
+            color: #bcaec2;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .container {
+                margin-top: 30px;
+            }
+
+            .header h1 {
+                font-size: 27px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-header {
+                align-items: flex-start;
+            }
+
+            .option {
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'settings' %}" class="back-btn">
+            ← Settings
+        </a>
+
+        <a href="{% url 'home' %}" class="logo">
+            VastraHub
+        </a>
+
+    </nav>
+
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <div class="header">
+
+            <h1>
+                Order Updates
+            </h1>
+
+            <p>
+                Manage notifications related to your orders.
+            </p>
+
+        </div>
+
+
+
+        <!-- MASTER SWITCH -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div class="card-title">
+
+                    <div class="icon">
+                        🔔
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Order Notifications
+                        </h2>
+
+                        <p>
+                            Receive important updates about your orders.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        id="masterToggle"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="info">
+
+                You will receive updates when your order is
+                confirmed, shipped, out for delivery, or delivered.
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ORDER STATUS -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div class="card-title">
+
+                    <div class="icon">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Order Status
+                        </h2>
+
+                        <p>
+                            Get notified about order progress.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONFIRMED -->
+
+            <div class="option">
+
+                <div class="option-left">
+
+                    <div class="option-icon">
+                        ✅
+                    </div>
+
+                    <div class="option-text">
+
+                        <h3>
+                            Order Confirmed
+                        </h3>
+
+                        <p>
+                            Notification when your order is confirmed.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        class="notificationToggle"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+
+            <!-- SHIPPED -->
+
+            <div class="option">
+
+                <div class="option-left">
+
+                    <div class="option-icon">
+                        🚚
+                    </div>
+
+                    <div class="option-text">
+
+                        <h3>
+                            Order Shipped
+                        </h3>
+
+                        <p>
+                            Know when your package leaves our warehouse.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        class="notificationToggle"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+
+            <!-- OUT FOR DELIVERY -->
+
+            <div class="option">
+
+                <div class="option-left">
+
+                    <div class="option-icon">
+                        🛵
+                    </div>
+
+                    <div class="option-text">
+
+                        <h3>
+                            Out for Delivery
+                        </h3>
+
+                        <p>
+                            Get notified when your order is on the way.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        class="notificationToggle"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+
+            <!-- DELIVERED -->
+
+            <div class="option">
+
+                <div class="option-left">
+
+                    <div class="option-icon">
+                        🎉
+                    </div>
+
+                    <div class="option-text">
+
+                        <h3>
+                            Order Delivered
+                        </h3>
+
+                        <p>
+                            Notification when your order is delivered.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        class="notificationToggle"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PAYMENT -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div class="card-title">
+
+                    <div class="icon">
+                        💳
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Payment Updates
+                        </h2>
+
+                        <p>
+                            Receive notifications about payment status.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        class="notificationToggle"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h2>
+            VastraHub
+        </h2>
+
+        <p>
+            Fashion that defines your style.
+        </p>
+
+    </footer>
+
+
+
+    <!-- THEME -->
+
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+    <!-- TOGGLE JS -->
+
+    <script>
+
+        const masterToggle =
+            document.getElementById("masterToggle");
+
+        const toggles =
+            document.querySelectorAll(".notificationToggle");
+
+
+        masterToggle.addEventListener("change", function () {
+
+            toggles.forEach(function (toggle) {
+
+                toggle.checked = masterToggle.checked;
+
+            });
+
+        });
+
+
+        toggles.forEach(function (toggle) {
+
+            toggle.addEventListener("change", function () {
+
+                const allOn =
+                    [...toggles].every(
+                        checkbox => checkbox.checked
+                    );
+
+                masterToggle.checked = allOn;
+
+            });
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

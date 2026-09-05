@@ -1,0 +1,616 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order Successful | VastraHub</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f1fa;
+            color: #49225b;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+
+            transition: 0.3s;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            background: white;
+
+            border-bottom: 1px solid #eadfed;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #6e3482;
+            font-size: 26px;
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        .home-link {
+            color: #49225b;
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .home-link:hover {
+            color: #6e3482;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+            flex: 1;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 50px 20px;
+        }
+
+
+        /* ================= SUCCESS CARD ================= */
+
+        .success-card {
+            width: 100%;
+            max-width: 650px;
+
+            background: white;
+
+            border: 1px solid #eadfed;
+            border-radius: 22px;
+
+            padding: 45px 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 45px rgba(73, 34, 91, 0.10);
+        }
+
+
+        /* ================= SUCCESS ICON ================= */
+
+        .success-icon {
+            width: 90px;
+            height: 90px;
+
+            margin: 0 auto 25px;
+
+            border-radius: 50%;
+
+            background: #eee1f3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 45px;
+
+            color: #6e3482;
+        }
+
+
+        .success-card h1 {
+            font-size: 32px;
+            color: #3e194d;
+
+            margin-bottom: 12px;
+        }
+
+        .success-message {
+            color: #817187;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ================= ORDER INFO ================= */
+
+        .order-info {
+            background: #faf6fc;
+
+            border: 1px solid #eadfed;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            margin-bottom: 30px;
+
+            text-align: left;
+        }
+
+        .info-row {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 11px 0;
+
+            border-bottom: 1px solid #eadfed;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #817187;
+
+            font-size: 13px;
+        }
+
+        .info-value {
+            color: #49225b;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            text-align: right;
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            background: #eee1f3;
+
+            color: #6e3482;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            text-transform: capitalize;
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            transition: 0.2s;
+        }
+
+        .primary-btn {
+            background: #6e3482;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: #582867;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: #f2e8f5;
+            color: #6e3482;
+        }
+
+        .secondary-btn:hover {
+            background: #e7d8eb;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #49225b;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px 20px;
+        }
+
+        footer h2 {
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        footer p {
+            color: #d8c9dd;
+            font-size: 12px;
+        }
+
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode {
+            background: #17121b;
+            color: white;
+        }
+
+        body.dark-mode .navbar {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .home-link {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .success-card {
+            background: #211827;
+            border-color: #392a40;
+
+            box-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.30);
+        }
+
+        body.dark-mode .success-icon {
+            background: #34253b;
+        }
+
+        body.dark-mode .success-card h1 {
+            color: white;
+        }
+
+        body.dark-mode .success-message {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .order-info {
+            background: #2a1e30;
+            border-color: #44334b;
+        }
+
+        body.dark-mode .info-row {
+            border-color: #44334b;
+        }
+
+        body.dark-mode .info-label {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .info-value {
+            color: #eadff0;
+        }
+
+        body.dark-mode .status {
+            background: #3c2944;
+            color: #dda4eb;
+        }
+
+        body.dark-mode .secondary-btn {
+            background: #34253b;
+            color: #dda4eb;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .main {
+                padding: 30px 15px;
+            }
+
+            .success-card {
+                padding: 35px 20px;
+                border-radius: 18px;
+            }
+
+            .success-icon {
+                width: 75px;
+                height: 75px;
+                font-size: 36px;
+            }
+
+            .success-card h1 {
+                font-size: 27px;
+            }
+
+            .success-message {
+                font-size: 14px;
+            }
+
+            .info-row {
+                align-items: flex-start;
+            }
+
+            .info-value {
+                max-width: 55%;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}"
+           class="logo">
+            VastraHub
+        </a>
+
+        <a href="{% url 'home' %}"
+           class="home-link">
+            ← Continue Shopping
+        </a>
+
+    </nav>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <div class="success-card">
+
+
+            <!-- SUCCESS ICON -->
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <h1>
+                Order Placed Successfully!
+            </h1>
+
+
+            <p class="success-message">
+
+                Thank you for shopping with
+                <strong>VastraHub</strong>.
+
+                Your order has been successfully placed.
+                We will start preparing your order soon.
+
+            </p>
+
+
+
+            <!-- ORDER INFORMATION -->
+
+            <div class="order-info">
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Order ID
+                    </span>
+
+                    <span class="info-value">
+                        #{{ order.id }}
+                    </span>
+
+                </div>
+
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Order Date
+                    </span>
+
+                    <span class="info-value">
+                        {{ order.created_at|date:"d M Y, h:i A" }}
+                    </span>
+
+                </div>
+
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Total Amount
+                    </span>
+
+                    <span class="info-value">
+                        ₹{{ order.total_amount }}
+                    </span>
+
+                </div>
+
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Payment Method
+                    </span>
+
+                    <span class="info-value">
+                        {{ order.get_payment_method_display }}
+                    </span>
+
+                </div>
+
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Payment Status
+                    </span>
+
+                    <span class="info-value">
+
+                        <span class="status">
+                            {{ order.get_payment_status_display }}
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Order Status
+                    </span>
+
+                    <span class="info-value">
+
+                        <span class="status">
+                            {{ order.get_order_status_display }}
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <a href="{% url 'my_orders' %}"
+                   class="btn primary-btn">
+
+                    View My Orders
+
+                </a>
+
+
+                <a href="{% url 'home' %}"
+                   class="btn secondary-btn">
+
+                    Continue Shopping
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h2>
+            VastraHub
+        </h2>
+
+        <p>
+            Fashion that defines your style.
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================= THEME JS ================= -->
+
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+</body>
+
+</html>

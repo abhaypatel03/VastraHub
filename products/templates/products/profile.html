@@ -1,0 +1,1297 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7effa;
+            color: #49225b;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            height: 75px;
+            background: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            border-bottom: 1px solid #eadcf0;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            color: #49225b;
+        }
+
+        .logo span {
+            color: #8b4aa8;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #5f4968;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #7b3f95;
+        }
+
+        .nav-links a.active {
+            color: #7b3f95;
+        }
+
+        .nav-links a.active::after {
+            content: "";
+
+            display: block;
+
+            height: 3px;
+
+            background: #7b3f95;
+
+            border-radius: 10px;
+
+            margin-top: 7px;
+        }
+
+
+        /* =========================
+           PROFILE PAGE
+        ========================== */
+
+        .profile-page {
+            padding: 50px 7%;
+            min-height: calc(100vh - 130px);
+        }
+
+        .profile-wrapper {
+            max-width: 1250px;
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: 280px 1fr;
+
+            gap: 30px;
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================== */
+
+        .profile-sidebar {
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            height: fit-content;
+
+            border: 1px solid #eadcf0;
+
+            box-shadow:
+                0 8px 30px rgba(73, 34, 91, 0.08);
+        }
+
+        .avatar {
+            width: 95px;
+            height: 95px;
+
+            margin: auto;
+            margin-bottom: 15px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #6e3482,
+                #a96bc0
+            );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 38px;
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px rgba(110, 52, 130, 0.25);
+        }
+
+        .profile-sidebar h2 {
+            font-size: 20px;
+
+            margin-bottom: 5px;
+
+            word-break: break-word;
+        }
+
+        .profile-sidebar > p {
+            color: #9b85a2;
+
+            font-size: 13px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           SIDEBAR MENU
+        ========================== */
+
+        .side-menu {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .side-menu a {
+            text-decoration: none;
+
+            color: #624b6c;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            text-align: left;
+
+            transition: 0.3s;
+        }
+
+        .side-menu a:hover {
+            background: #f5ebfa;
+
+            color: #6e3482;
+        }
+
+        .side-menu a.selected {
+            background: #f1e3f6;
+
+            color: #6e3482;
+        }
+
+        .side-menu a.logout {
+            color: #c34c61;
+
+            margin-top: 8px;
+        }
+
+        .side-menu a.logout:hover {
+            background: #fff0f2;
+
+            color: #b8324a;
+        }
+
+        /* =========================
+           LOGOUT BUTTON
+        ========================== */
+
+        .logout-form {
+            margin: 0;
+            width: 100%;
+        }
+
+        .logout-button {
+            width: 100%;
+
+            border: none;
+
+            background: transparent;
+
+            font-family: inherit;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            color: #c34c61;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .logout-button:hover {
+            background: #fff0f2;
+
+            color: #b8324a;
+        }
+
+
+        /* =========================
+           MAIN CONTENT
+        ========================== */
+
+        .profile-content {
+            min-width: 0;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+
+            margin-bottom: 7px;
+
+            color: #49225b;
+        }
+
+        .page-title p {
+            color: #927b99;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           PROFILE CARD
+        ========================== */
+
+        .profile-card {
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            border: 1px solid #eadcf0;
+
+            box-shadow:
+                0 8px 30px rgba(73, 34, 91, 0.07);
+        }
+
+        .card-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding-bottom: 20px;
+
+            margin-bottom: 25px;
+
+            border-bottom: 1px solid #eee4f1;
+        }
+
+        .card-top h2 {
+            font-size: 19px;
+
+            margin-bottom: 5px;
+        }
+
+        .card-top p {
+            color: #9b879f;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           EDIT BUTTON
+        ========================== */
+
+        .edit-btn {
+            border: none;
+
+            background: #6e3482;
+
+            color: white;
+
+            padding: 11px 19px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .edit-btn:hover {
+            background: #542667;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           INFORMATION
+        ========================== */
+
+        .information-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+        }
+
+        .information-box {
+            background: #faf7fc;
+
+            border: 1px solid #eee3f2;
+
+            border-radius: 11px;
+
+            padding: 17px;
+        }
+
+        .information-box label {
+            display: block;
+
+            color: #99849f;
+
+            font-size: 12px;
+
+            margin-bottom: 8px;
+        }
+
+        .information-box strong {
+            display: block;
+
+            color: #4d3457;
+
+            font-size: 15px;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           ACCOUNT OVERVIEW
+        ========================== */
+
+        .section-title {
+            font-size: 20px;
+
+            margin-top: 32px;
+
+            margin-bottom: 17px;
+        }
+
+        .stats {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        /* =========================
+           STAT CARD
+        ========================== */
+
+        .stat-card {
+            background: #ffffff;
+
+            border: 1px solid #eadcf0;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            box-shadow:
+                0 7px 25px rgba(73, 34, 91, 0.05);
+
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 12px 30px rgba(73, 34, 91, 0.1);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 12px;
+
+            background: #f2e5f7;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+        .stat-card h3 {
+            font-size: 22px;
+
+            margin-bottom: 3px;
+        }
+
+        .stat-card p {
+            color: #99849f;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           WELCOME CARD
+        ========================== */
+
+        .welcome {
+            margin-top: 25px;
+
+            padding: 28px;
+
+            border-radius: 18px;
+
+            background: linear-gradient(
+                135deg,
+                #5e2d70,
+                #8b4aa8
+            );
+
+            color: white;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .welcome h2 {
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #f0e5f4;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .shop-btn {
+            text-decoration: none;
+
+            background: white;
+
+            color: #6e3482;
+
+            padding: 12px 22px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            transition: 0.3s;
+        }
+
+        .shop-btn:hover {
+            background: #f5ebfa;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            min-height: 55px;
+
+            padding: 15px;
+
+            background: white;
+
+            border-top: 1px solid #eadcf0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #927c99;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           TABLET
+        ========================== */
+
+        @media (max-width: 950px) {
+
+            .profile-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-sidebar {
+                width: 100%;
+            }
+
+            .side-menu {
+                display: grid;
+
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+
+                padding: 18px 5%;
+
+                flex-direction: column;
+
+                gap: 18px;
+            }
+
+            .nav-links {
+                gap: 16px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .profile-page {
+                padding: 30px 5%;
+            }
+
+            .page-title h1 {
+                font-size: 27px;
+            }
+
+            .profile-card {
+                padding: 20px;
+            }
+
+            .card-top {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+            .edit-btn {
+                width: 100%;
+            }
+
+            .information-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .shop-btn {
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+
+
+        /* =========================
+           SMALL MOBILE
+        ========================== */
+
+        @media (max-width: 430px) {
+
+            .side-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-sidebar {
+                padding: 25px 15px;
+            }
+
+            .avatar {
+                width: 80px;
+                height: 80px;
+
+                font-size: 30px;
+            }
+
+            .profile-card {
+                padding: 17px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Vastra<span>Hub</span>
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'men' %}">
+            Men
+        </a>
+
+        <a href="{% url 'women' %}">
+            Women
+        </a>
+
+        <a href="{% url 'kids' %}">
+            Kids
+        </a>
+
+        <a href="{% url 'profile' %}" class="active">
+            Profile
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     PROFILE PAGE
+========================= -->
+
+<main class="profile-page">
+
+    <div class="profile-wrapper">
+
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
+
+        <aside class="profile-sidebar">
+
+
+            <!-- AVATAR -->
+
+            <div class="avatar">
+
+                {% if user.is_authenticated %}
+
+                    {{ user.username|first|upper }}
+
+                {% else %}
+
+                    U
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- USERNAME -->
+
+            <h2>
+
+                {% if user.is_authenticated %}
+
+                    {{ user.username }}
+
+                {% else %}
+
+                    Guest User
+
+                {% endif %}
+
+            </h2>
+
+
+            <p>
+                VastraHub Member
+            </p>
+
+
+
+            <!-- SIDEBAR MENU -->
+
+            <div class="side-menu">
+
+
+                <!-- PROFILE -->
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="selected"
+                >
+
+                    <span>👤</span>
+
+                    My Profile
+
+                </a>
+
+
+
+                <!-- ORDERS -->
+
+                <a href="{% url 'my_orders' %}">
+
+                    <span>📦</span>
+
+                    My Orders
+
+                </a>
+
+
+
+                <!-- WISHLIST -->
+
+                <a href="{% url 'wishlist' %}">
+
+                    <span>❤️</span>
+
+                    Wishlist
+
+                    {% if wishlist_count > 0 %}
+
+                        <span
+                            style="
+                                margin-left:auto;
+                                background:#f1e3f6;
+                                color:#6e3482;
+                                padding:3px 8px;
+                                border-radius:20px;
+                                font-size:11px;
+                            "
+                        >
+                            {{ wishlist_count }}
+
+                        </span>
+
+                    {% endif %}
+
+                </a>
+
+
+
+                <!-- ADDRESS -->
+
+                <a href="{% url 'address' %}">
+
+                    <span>📍</span>
+
+                    My Address
+
+                </a>
+
+
+
+                <!-- SETTINGS -->
+
+                <a href="{% url 'settings' %}">
+    Settings
+</a>
+
+
+
+                <!-- LOGOUT -->
+
+                {% if user.is_authenticated %}
+
+                    <form
+                        method="post"
+                        action="{% url 'logout' %}"
+                        class="logout-form"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="logout-button"
+                        >
+
+                            <span>🚪</span>
+
+                            Logout
+
+                        </button>
+
+                    </form>
+
+                {% else %}
+
+                    <a
+                        href="/accounts/login/"
+                        class="logout"
+                    >
+
+                        <span>🔐</span>
+
+                        Login
+
+                    </a>
+
+                {% endif %}
+
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+
+        <section class="profile-content">
+
+
+            <!-- PAGE TITLE -->
+
+            <div class="page-title">
+
+                <h1>
+                    My Profile
+                </h1>
+
+                <p>
+                    Manage your account and personal information
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 PERSONAL INFORMATION
+            ========================== -->
+
+            <div class="profile-card">
+
+
+                <div class="card-top">
+
+
+                    <div>
+
+                        <h2>
+                            Personal Information
+                        </h2>
+
+                        <p>
+                            Your account details
+                        </p>
+
+                    </div>
+
+
+
+                    <button
+                        class="edit-btn"
+                        type="button"
+                        onclick="
+                            window.location.href=
+                            '{% url 'edit_profile' %}'
+                        "
+                    >
+
+                        Edit Profile
+
+                    </button>
+
+
+                </div>
+
+
+
+                <div class="information-grid">
+
+
+                    <!-- USERNAME -->
+
+                    <div class="information-box">
+
+                        <label>
+                            Username
+                        </label>
+
+                        <strong>
+
+                            {% if user.is_authenticated %}
+
+                                {{ user.username }}
+
+                            {% else %}
+
+                                Guest User
+
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="information-box">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <strong>
+
+                            {% if user.is_authenticated %}
+
+                                {{ user.email|default:"Not added" }}
+
+                            {% else %}
+
+                                Not available
+
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- FIRST NAME -->
+
+                    <div class="information-box">
+
+                        <label>
+                            First Name
+                        </label>
+
+                        <strong>
+
+                            {% if user.is_authenticated %}
+
+                                {{ user.first_name|default:"Not added" }}
+
+                            {% else %}
+
+                                Not available
+
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- LAST NAME -->
+
+                    <div class="information-box">
+
+                        <label>
+                            Last Name
+                        </label>
+
+                        <strong>
+
+                            {% if user.is_authenticated %}
+
+                                {{ user.last_name|default:"Not added" }}
+
+                            {% else %}
+
+                                Not available
+
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 ACCOUNT OVERVIEW
+            ========================== -->
+
+            <h2 class="section-title">
+
+                Account Overview
+
+            </h2>
+
+
+
+            <div class="stats">
+
+
+                <!-- TOTAL ORDERS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            {{ total_orders|default:"0" }}
+                        </h3>
+
+                        <p>
+                            Total Orders
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- WISHLIST -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ❤️
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            {{ wishlist_count|default:"0" }}
+                        </h3>
+
+                        <p>
+                            Wishlist
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ADDRESS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📍
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            {{ address_count|default:"0" }}
+                        </h3>
+
+                        <p>
+                            Saved Address
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 WELCOME
+            ========================== -->
+
+            <div class="welcome">
+
+
+                <div class="welcome-text">
+
+                    <h2>
+                        Welcome to VastraHub 👋
+                    </h2>
+
+                    <p>
+                        Explore the latest fashion collection
+                        for Men, Women and Kids.
+                    </p>
+
+                </div>
+
+
+
+                <a
+                    href="{% url 'home' %}"
+                    class="shop-btn"
+                >
+
+                    Shop Now
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © 2026 VastraHub. All Rights Reserved.
+
+</footer>
+
+
+</body>
+
+</html>

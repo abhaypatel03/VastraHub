@@ -1,0 +1,974 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VastraHub | Kids Collection</title>
+
+    <link rel="stylesheet"
+          href="{% static 'products/css/style.css' %}">
+
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f1fb;
+            color: #49225b;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+
+            width: 100%;
+
+            background: #ffffff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 18px 5%;
+
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 999;
+
+        }
+
+
+        .logo {
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+            color: #6e3482;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+
+        }
+
+
+        .nav-links a {
+
+            color: #49225b;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+
+        }
+
+
+        .nav-links a:hover {
+
+            color: #9b4db7;
+
+        }
+
+
+        .nav-links a.active {
+
+            color: #9b4db7;
+
+        }
+
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .kids-hero {
+
+            width: 90%;
+
+            margin: 30px auto;
+
+            min-height: 300px;
+
+            border-radius: 25px;
+
+            background:
+
+                linear-gradient(
+                    rgba(73,34,91,0.25),
+                    rgba(73,34,91,0.25)
+                ),
+
+                url("{% static 'products/images/kids-banner.jpg' %}");
+
+            background-size: cover;
+
+            background-position: center;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 40px;
+
+        }
+
+
+        .hero-content {
+
+            color: white;
+
+            max-width: 700px;
+
+        }
+
+
+        .hero-content small {
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        .hero-content h1 {
+
+            font-size: 46px;
+
+            margin: 12px 0;
+
+            font-weight: 800;
+
+        }
+
+
+        .hero-content p {
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+        }
+
+
+
+        /* =========================
+           SECTION TITLE
+        ========================= */
+
+        .section-heading {
+
+            width: 90%;
+
+            margin: 45px auto 25px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+
+        .section-heading h2 {
+
+            font-size: 30px;
+
+            color: #49225b;
+
+        }
+
+
+        .product-count {
+
+            color: #80618a;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+
+        /* =========================
+           PRODUCT GRID
+        ========================= */
+
+        .products-grid {
+
+            width: 90%;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(5, 1fr);
+
+            gap: 20px;
+
+            padding-bottom: 60px;
+
+        }
+
+
+
+        /* =========================
+           PRODUCT CARD
+        ========================= */
+
+        .product-card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 18px rgba(73,34,91,0.10);
+
+            transition: all 0.3s ease;
+
+            position: relative;
+
+        }
+
+
+        .product-card:hover {
+
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 10px 25px rgba(73,34,91,0.18);
+
+        }
+
+
+
+        /* =========================
+           PRODUCT IMAGE
+        ========================= */
+
+        .product-image {
+
+            width: 100%;
+
+            height: 300px;
+
+            background: #f2e8f5;
+
+            overflow: hidden;
+
+        }
+
+
+        .product-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            object-position: center;
+
+            transition: transform 0.4s ease;
+
+        }
+
+
+        .product-card:hover
+        .product-image img {
+
+            transform: scale(1.05);
+
+        }
+
+
+
+        /* =========================
+           PRODUCT INFORMATION
+        ========================= */
+
+        .product-info {
+
+            padding: 15px;
+
+        }
+
+
+        .product-name {
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            color: #49225b;
+
+            margin-bottom: 8px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .product-description {
+
+            color: #777;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            height: 40px;
+
+            overflow: hidden;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .product-price {
+
+            color: #6e3482;
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+            margin-bottom: 12px;
+
+        }
+
+
+
+        /* =========================
+           VIEW PRODUCT BUTTON
+        ========================= */
+
+        .view-product {
+
+            width: 100%;
+
+            display: block;
+
+            text-align: center;
+
+            background: #6e3482;
+
+            color: white;
+
+            padding: 11px 10px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+
+        }
+
+
+        .view-product:hover {
+
+            background: #49225b;
+
+            color: white;
+
+        }
+
+
+
+        /* =========================
+           EMPTY PRODUCTS
+        ========================= */
+
+        .empty-products {
+
+            width: 90%;
+
+            margin: 50px auto;
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 70px 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 5px 18px rgba(73,34,91,0.08);
+
+        }
+
+
+        .empty-products h2 {
+
+            color: #49225b;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .empty-products p {
+
+            color: #777;
+
+            font-size: 15px;
+
+        }
+
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            width: 100%;
+
+            background: #49225b;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px 15px;
+
+            margin-top: 30px;
+
+        }
+
+
+        footer p {
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1200px) {
+
+            .products-grid {
+
+                grid-template-columns: repeat(4, 1fr);
+
+            }
+
+        }
+
+
+
+        /* =========================
+           TABLET SMALL
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .products-grid {
+
+                grid-template-columns: repeat(3, 1fr);
+
+            }
+
+
+            .hero-content h1 {
+
+                font-size: 38px;
+
+            }
+
+
+            .nav-links {
+
+                gap: 18px;
+
+            }
+
+        }
+
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+
+                flex-direction: column;
+
+                gap: 15px;
+
+                padding: 15px;
+
+            }
+
+
+            .nav-links {
+
+                gap: 15px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+            }
+
+
+            .kids-hero {
+
+                width: 94%;
+
+                min-height: 260px;
+
+                padding: 25px;
+
+            }
+
+
+            .hero-content h1 {
+
+                font-size: 30px;
+
+            }
+
+
+            .hero-content p {
+
+                font-size: 14px;
+
+            }
+
+
+            .section-heading {
+
+                width: 94%;
+
+            }
+
+
+            .section-heading h2 {
+
+                font-size: 23px;
+
+            }
+
+
+            .products-grid {
+
+                width: 94%;
+
+                grid-template-columns: repeat(2, 1fr);
+
+                gap: 12px;
+
+            }
+
+
+            .product-image {
+
+                height: 240px;
+
+            }
+
+
+            .product-info {
+
+                padding: 12px;
+
+            }
+
+
+            .product-name {
+
+                font-size: 14px;
+
+            }
+
+
+            .product-price {
+
+                font-size: 17px;
+
+            }
+
+        }
+
+
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 420px) {
+
+            .products-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .product-image {
+
+                height: 330px;
+
+            }
+
+
+            .hero-content h1 {
+
+                font-size: 26px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+
+        <a href="{% url 'home' %}" class="logo">
+
+            VASTRAHUB
+
+        </a>
+
+
+        <div class="nav-links">
+
+
+            <a href="{% url 'home' %}">
+
+                Home
+
+            </a>
+
+
+            <a href="{% url 'men' %}">
+
+                Men
+
+            </a>
+
+
+            <a href="{% url 'women' %}">
+
+                Women
+
+            </a>
+
+
+            <a href="{% url 'kids' %}" class="active">
+
+                Kids
+
+            </a>
+
+
+            <a href="{% url 'profile' %}">
+
+                Profile
+
+            </a>
+
+
+        </div>
+
+
+    </nav>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="kids-hero">
+
+
+        <div class="hero-content">
+
+
+            <small>
+
+                KIDS COLLECTION
+
+            </small>
+
+
+            <h1>
+
+                Little Styles, Big Smiles
+
+            </h1>
+
+
+            <p>
+
+                Cute, comfortable and stylish outfits
+                specially made for little ones.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         SECTION HEADING
+    ========================= -->
+
+    <div class="section-heading">
+
+
+        <h2>
+
+            Kids Collection
+
+        </h2>
+
+
+        <span class="product-count">
+
+            {{ products|length }} Products
+
+        </span>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         PRODUCTS
+    ========================= -->
+
+    {% if products %}
+
+
+    <div class="products-grid">
+
+
+        {% for product in products %}
+
+
+        <div class="product-card">
+
+
+            <!-- PRODUCT IMAGE -->
+
+            <div class="product-image">
+
+
+                {% if product.image %}
+
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                    >
+
+
+                {% else %}
+
+
+                    <img
+                        src="{% static 'products/images/no-image.png' %}"
+                        alt="No Image"
+                    >
+
+
+                {% endif %}
+
+
+            </div>
+
+
+
+            <!-- PRODUCT INFORMATION -->
+
+            <div class="product-info">
+
+
+                <h3 class="product-name">
+
+                    {{ product.name }}
+
+                </h3>
+
+
+                <p class="product-description">
+
+                    {{ product.description|truncatechars:70 }}
+
+                </p>
+
+
+                <div class="product-price">
+
+                    ₹{{ product.price }}
+
+                </div>
+
+
+                <a
+                    href="{% url 'product_detail' product.id %}"
+                    class="view-product"
+                >
+
+                    View Product
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <!-- NO PRODUCTS -->
+
+    <div class="empty-products">
+
+
+        <h2>
+
+            No Kids Products Available
+
+        </h2>
+
+
+        <p>
+
+            Kids products will appear here after
+            adding them from the Admin Panel.
+
+        </p>
+
+
+    </div>
+
+
+    {% endif %}
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+
+        <p>
+
+            © 2026 VastraHub.
+            All Rights Reserved.
+
+        </p>
+
+
+    </footer>
+
+
+</body>
+
+</html>

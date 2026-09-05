@@ -1,0 +1,857 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5ebfa;
+            color: #49225b;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 15px rgba(73, 34, 91, 0.10);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #6e3482;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #49225b;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #9b59b6;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 18px;
+        }
+
+        .nav-icons a {
+            text-decoration: none;
+            color: #49225b;
+            font-size: 21px;
+        }
+
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 45px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .page-title h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #765582;
+        }
+
+
+        /* ================= MESSAGES ================= */
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            background: #ffe6e6;
+            color: #c0392b;
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+
+        /* ================= CHECKOUT GRID ================= */
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+
+        /* ================= CARD ================= */
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 7px 22px rgba(73, 34, 91, 0.10);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            font-size: 21px;
+            margin-bottom: 22px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            font-size: 14px;
+            background: white;
+            color: #333;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #6e3482;
+            box-shadow: 0 0 0 3px rgba(110, 52, 130, 0.10);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+
+        /* ================= PAYMENT ================= */
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .payment-option:hover {
+            border-color: #6e3482;
+            background: #faf5fc;
+        }
+
+        .payment-option input {
+            width: 18px;
+            height: 18px;
+            accent-color: #6e3482;
+        }
+
+        .payment-title {
+            font-weight: bold;
+        }
+
+        .payment-subtitle {
+            display: block;
+            font-size: 12px;
+            color: #765582;
+            margin-top: 3px;
+        }
+
+
+        /* ================= ORDER ITEMS ================= */
+
+        .order-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .item-detail {
+            color: #765582;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .item-price {
+            color: #6e3482;
+            font-weight: bold;
+        }
+
+
+        /* ================= SUMMARY ================= */
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            color: #765582;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid #ddd;
+            padding-top: 18px;
+            margin-top: 18px;
+            color: #49225b;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+        /* ================= BUTTON ================= */
+
+        .place-order-btn {
+            width: 100%;
+            border: none;
+            background: #6e3482;
+            color: white;
+            padding: 15px;
+            border-radius: 11px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .place-order-btn:hover {
+            background: #49225b;
+            transform: translateY(-1px);
+        }
+
+
+        /* ================= BACK ================= */
+
+        .back-cart {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #6e3482;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-cart:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode {
+            background: #18121d;
+            color: #f4eafa;
+        }
+
+        body.dark-mode .navbar,
+        body.dark-mode .card {
+            background: #241b2a;
+        }
+
+        body.dark-mode .logo,
+        body.dark-mode .nav-links a,
+        body.dark-mode .nav-icons a,
+        body.dark-mode .page-title h1,
+        body.dark-mode .card h2,
+        body.dark-mode .summary-row.total {
+            color: #f0dafa;
+        }
+
+        body.dark-mode .page-title p,
+        body.dark-mode .item-detail,
+        body.dark-mode .summary-row,
+        body.dark-mode .payment-subtitle {
+            color: #c5adcf;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea,
+        body.dark-mode .form-group select {
+            background: #18121d;
+            color: white;
+            border-color: #4b3b52;
+        }
+
+        body.dark-mode .payment-option {
+            border-color: #4b3b52;
+            background: #241b2a;
+        }
+
+        body.dark-mode .payment-option:hover {
+            background: #33253b;
+            border-color: #9b59b6;
+        }
+
+        body.dark-mode .order-item {
+            border-color: #3c3043;
+        }
+
+        body.dark-mode .summary-row.total {
+            border-color: #3c3043;
+        }
+
+
+        /* ================= TABLET ================= */
+
+        @media (max-width: 900px) {
+
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 4%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                width: 94%;
+                margin: 30px auto;
+            }
+
+            .page-title h1 {
+                font-size: 29px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .product-image {
+                width: 65px;
+                height: 85px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        VastraHub
+    </a>
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'men' %}">
+            Men
+        </a>
+
+        <a href="{% url 'women' %}">
+            Women
+        </a>
+
+        <a href="{% url 'kids' %}">
+            Kids
+        </a>
+
+    </div>
+
+    <div class="nav-icons">
+
+        <a href="{% url 'wishlist' %}">
+            ♡
+        </a>
+
+        <a href="{% url 'cart' %}">
+            🛒
+        </a>
+
+        <a href="{% url 'profile' %}">
+            👤
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <div class="page-title">
+
+        <h1>
+            Checkout
+        </h1>
+
+        <p>
+            Complete your order securely
+        </p>
+
+    </div>
+
+
+    <!-- ================= MESSAGES ================= -->
+
+    {% if messages %}
+
+        <div class="messages">
+
+            {% for message in messages %}
+
+                <div class="message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+
+    <!-- ================= CHECKOUT FORM ================= -->
+
+    <form
+        method="POST"
+        action="{% url 'place_order' %}"
+    >
+
+        {% csrf_token %}
+
+
+        <div class="checkout-grid">
+
+
+            <!-- ================= LEFT SIDE ================= -->
+
+            <div>
+
+
+                <!-- DELIVERY DETAILS -->
+
+                <div class="card">
+
+                    <h2>
+                        📍 Delivery Details
+                    </h2>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="full_name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="full_name"
+                                name="full_name"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Enter phone number"
+                                maxlength="10"
+                                inputmode="numeric"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="address">
+                            Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            placeholder="House No, Street, Area"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="city">
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                placeholder="Enter city"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="state">
+                                State
+                            </label>
+
+                            <input
+                                type="text"
+                                id="state"
+                                name="state"
+                                placeholder="Enter state"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="pincode">
+                            Pincode
+                        </label>
+
+                        <input
+                            type="text"
+                            id="pincode"
+                            name="pincode"
+                            placeholder="Enter 6 digit pincode"
+                            maxlength="6"
+                            inputmode="numeric"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PAYMENT METHOD -->
+
+                <div class="card">
+
+                    <h2>
+                        💳 Payment Method
+                    </h2>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="cod"
+                            checked
+                        >
+
+                        <div>
+
+                            <span class="payment-title">
+                                Cash on Delivery
+                            </span>
+
+                            <span class="payment-subtitle">
+                                Pay when your order arrives
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="online"
+                        >
+
+                        <div>
+
+                            <span class="payment-title">
+                                Online Payment
+                            </span>
+
+                            <span class="payment-subtitle">
+                                Pay securely online
+                            </span>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= RIGHT SIDE ================= -->
+
+            <div>
+
+
+                <!-- ORDER SUMMARY -->
+
+                <div class="card">
+
+                    <h2>
+                        🛍️ Your Order
+                    </h2>
+
+
+                    {% for item in cart_items %}
+
+                        <div class="order-item">
+
+
+                            {% if item.product.image %}
+
+                                <img
+                                    src="{{ item.product.image.url }}"
+                                    alt="{{ item.product.name }}"
+                                    class="product-image"
+                                >
+
+                            {% else %}
+
+                                <img
+                                    src="{% static 'products/images/no-image.png' %}"
+                                    alt="No Image"
+                                    class="product-image"
+                                >
+
+                            {% endif %}
+
+
+                            <div class="item-info">
+
+                                <div class="item-name">
+                                    {{ item.product.name }}
+                                </div>
+
+                                <div class="item-detail">
+                                    Size: {{ item.size }}
+                                </div>
+
+                                <div class="item-detail">
+                                    Quantity: {{ item.quantity }}
+                                </div>
+
+                                <div class="item-price">
+                                    ₹{{ item.product.price }}
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    {% endfor %}
+
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <span>
+                            ₹{{ total }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <span>
+                            FREE
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <span>
+                            ₹{{ total }}
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="place-order-btn"
+                    >
+                        Place Order
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </form>
+
+
+</main>
+
+
+
+<!-- ================= THEME ================= -->
+
+<script src="{% static 'products/js/theme.js' %}"></script>
+
+
+</body>
+
+</html>

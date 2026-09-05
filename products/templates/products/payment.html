@@ -1,0 +1,438 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f5ebfa;
+            color: #49225b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .payment-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .payment-card {
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(73, 34, 91, 0.12);
+        }
+
+        .logo {
+            display: inline-block;
+            color: #6e3482;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .payment-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #f1e7f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+        }
+
+        h1 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #765582;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .order-box {
+            background: #faf7fc;
+            border-radius: 14px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 22px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 10px 0;
+            color: #765582;
+            font-size: 14px;
+        }
+
+        .row strong {
+            color: #49225b;
+        }
+
+        .total {
+            border-top: 1px solid #ddd;
+            margin-top: 8px;
+            padding-top: 17px;
+            font-size: 19px;
+            font-weight: bold;
+            color: #49225b;
+        }
+
+        .pay-btn {
+            width: 100%;
+            border: none;
+            background: #6e3482;
+            color: white;
+            padding: 16px;
+            border-radius: 11px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .pay-btn:hover {
+            background: #49225b;
+            transform: translateY(-1px);
+        }
+
+        .pay-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .secure {
+            margin-top: 18px;
+            color: #765582;
+            font-size: 12px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 18px;
+            color: #6e3482;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode {
+            background: #18121d;
+            color: #f4eafa;
+        }
+
+        body.dark-mode .payment-card {
+            background: #241b2a;
+        }
+
+        body.dark-mode .payment-icon,
+        body.dark-mode .order-box {
+            background: #18121d;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode .row strong,
+        body.dark-mode .total {
+            color: #f0dafa;
+        }
+
+        body.dark-mode .subtitle,
+        body.dark-mode .row,
+        body.dark-mode .secure {
+            color: #c5adcf;
+        }
+
+        body.dark-mode .total {
+            border-color: #3c3043;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .payment-card {
+                padding: 25px 18px;
+                border-radius: 17px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="payment-container">
+
+
+    <div class="payment-card">
+
+
+        <div class="logo">
+            VastraHub
+        </div>
+
+
+        <div class="payment-icon">
+            💳
+        </div>
+
+
+        <h1>
+            Secure Payment
+        </h1>
+
+
+        <p class="subtitle">
+            Complete your payment to confirm your order
+        </p>
+
+
+        <!-- ================= ORDER DETAILS ================= -->
+
+        <div class="order-box">
+
+            <div class="row">
+
+                <span>
+                    Order ID
+                </span>
+
+                <strong>
+                    #{{ order.id }}
+                </strong>
+
+            </div>
+
+
+            <div class="row">
+
+                <span>
+                    Payment Method
+                </span>
+
+                <strong>
+                    Online Payment
+                </strong>
+
+            </div>
+
+
+            <div class="row total">
+
+                <span>
+                    Total Amount
+                </span>
+
+                <span>
+                    ₹{{ total }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= PAYMENT BUTTON ================= -->
+
+        <button
+            type="button"
+            id="payButton"
+            class="pay-btn"
+        >
+            💳 Pay ₹{{ total }}
+        </button>
+
+
+        <div class="secure">
+            🔒 Secure payment powered by Razorpay
+        </div>
+
+
+        <a
+            href="{% url 'checkout' %}"
+            class="back"
+        >
+            ← Back to Checkout
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<!-- ================= RAZORPAY ================= -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+<script>
+
+    const payButton =
+        document.getElementById("payButton");
+
+
+    payButton.addEventListener("click", function () {
+
+        payButton.disabled = true;
+
+        payButton.innerText = "Opening Payment...";
+
+
+        const options = {
+
+            key: "{{ razorpay_key }}",
+
+            amount: "{{ amount }}",
+
+            currency: "INR",
+
+            name: "VastraHub",
+
+            description: "VastraHub Order #{{ order.id }}",
+
+            order_id: "{{ razorpay_order_id }}",
+
+            handler: function (response) {
+
+                const params = new URLSearchParams({
+
+                    razorpay_payment_id:
+                        response.razorpay_payment_id,
+
+                    razorpay_order_id:
+                        response.razorpay_order_id,
+
+                    razorpay_signature:
+                        response.razorpay_signature
+
+                });
+
+
+                window.location.href =
+                    "{% url 'payment_success' %}"
+                    + "?"
+                    + params.toString();
+
+            },
+
+
+            prefill: {
+
+                name: "{{ order.full_name|escapejs }}",
+
+                contact: "{{ order.phone|default:''|escapejs }}",
+
+                email: "{{ request.user.email|escapejs }}"
+
+            },
+
+
+            notes: {
+
+                order_id: "{{ order.id }}"
+
+            },
+
+
+            theme: {
+
+                color: "#6e3482"
+
+            },
+
+
+            modal: {
+
+                ondismiss: function () {
+
+                    payButton.disabled = false;
+
+                    payButton.innerText =
+                        "💳 Pay ₹{{ total }}";
+
+                }
+
+            }
+
+        };
+
+
+        const razorpay =
+            new Razorpay(options);
+
+
+        razorpay.on(
+            "payment.failed",
+            function (response) {
+
+                alert(
+                    "Payment failed. Please try again."
+                );
+
+                payButton.disabled = false;
+
+                payButton.innerText =
+                    "💳 Pay ₹{{ total }}";
+
+            }
+        );
+
+
+        razorpay.open();
+
+    });
+
+</script>
+
+
+<script src="{% static 'products/js/theme.js' %}"></script>
+
+
+</body>
+
+</html>

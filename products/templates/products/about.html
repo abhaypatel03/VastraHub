@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About VastraHub</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f7f1fa;
+            color: #34213f;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            height: 70px;
+            padding: 0 7%;
+            background: #fff;
+            border-bottom: 1px solid #eadfed;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo { color: #6e3482; font-size: 25px; font-weight: 700; text-decoration: none; }
+        .back { color: #6e3482; text-decoration: none; font-weight: 700; }
+        .container { width: 90%; max-width: 760px; margin: 55px auto; }
+        .panel {
+            padding: 42px;
+            background: #fff;
+            border: 1px solid #eadfed;
+            border-radius: 18px;
+            box-shadow: 0 8px 28px rgba(73,34,91,.09);
+        }
+        .eyebrow { color: #8b4ba3; font-size: 12px; font-weight: 700; letter-spacing: 2px; }
+        h1 { margin: 12px 0; color: #49225b; font-size: 36px; }
+        p { color: #75657c; line-height: 1.7; }
+        .features { margin: 28px 0 0; padding: 0; list-style: none; }
+        .features li { padding: 15px 0; border-top: 1px solid #f0e8f3; color: #49225b; font-weight: 600; }
+        @media (max-width: 600px) {
+            .navbar { padding: 0 20px; }
+            .container { margin: 30px auto; }
+            .panel { padding: 28px 22px; }
+            h1 { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="logo">VastraHub</a>
+        <a href="{% url 'settings' %}" class="back">Back to Settings</a>
+    </nav>
+    <main class="container">
+        <section class="panel">
+            <div class="eyebrow">ABOUT VASTRAHUB</div>
+            <h1>Fashion made simple.</h1>
+            <p>VastraHub brings everyday style for men, women, and kids into one easy shopping experience.</p>
+            <ul class="features">
+                <li>Curated fashion collections</li>
+                <li>Simple and secure shopping</li>
+                <li>Easy order and address management</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

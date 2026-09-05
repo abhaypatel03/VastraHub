@@ -1,0 +1,731 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f1fa;
+            color: #49225b;
+            min-height: 100vh;
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #eadfed;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #6e3482;
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .back {
+            color: #49225b;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .back:hover {
+            color: #6e3482;
+        }
+
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            max-width: 1050px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            color: #3e194d;
+            font-size: 32px;
+            margin-bottom: 7px;
+        }
+
+        .heading p {
+            color: #817187;
+            font-size: 14px;
+        }
+
+
+        /* ================= ORDER CARD ================= */
+
+        .order-card {
+            background: white;
+            border: 1px solid #eadfed;
+            border-radius: 18px;
+
+            margin-bottom: 20px;
+            padding: 22px;
+
+            box-shadow:
+                0 8px 25px rgba(73, 34, 91, 0.07);
+        }
+
+
+        /* ================= ORDER HEADER ================= */
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+
+            padding-bottom: 17px;
+            border-bottom: 1px solid #eadfed;
+        }
+
+        .order-id {
+            color: #49225b;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .date {
+            color: #817187;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .status {
+            padding: 7px 13px;
+            border-radius: 20px;
+
+            background: #eee1f3;
+            color: #6e3482;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            text-transform: capitalize;
+        }
+
+
+        /* ================= PRODUCTS ================= */
+
+        .products {
+            padding: 20px 0;
+        }
+
+        .product-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #f0e9f2;
+        }
+
+        .product-row:last-child {
+            border-bottom: none;
+        }
+
+        .product-image {
+            width: 75px;
+            height: 85px;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            background: #f3eaf6;
+
+            flex-shrink: 0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            color: #49225b;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            margin-bottom: 6px;
+        }
+
+        .product-quantity {
+            color: #817187;
+            font-size: 12px;
+        }
+
+        .product-price {
+            color: #6e3482;
+
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+
+        /* ================= FOOTER INFO ================= */
+
+        .order-footer {
+            border-top: 1px solid #eadfed;
+
+            padding-top: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .total-label {
+            color: #817187;
+            font-size: 12px;
+        }
+
+        .total {
+            color: #3e194d;
+            font-size: 20px;
+            font-weight: 900;
+            margin-top: 4px;
+        }
+
+        .payment {
+            color: #817187;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border-radius: 9px;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            transition: 0.2s;
+        }
+
+        .details-btn {
+            background: #6e3482;
+            color: white;
+        }
+
+        .details-btn:hover {
+            background: #582867;
+        }
+
+        .delete-btn {
+            background: #fbe9ed;
+            color: #b4233c;
+        }
+
+        .delete-btn:hover {
+            background: #f6d9df;
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            background: white;
+            border: 1px solid #eadfed;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            box-shadow:
+                0 8px 25px rgba(73, 34, 91, 0.07);
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .empty h2 {
+            color: #49225b;
+            margin-bottom: 8px;
+        }
+
+        .empty p {
+            color: #817187;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+
+            background: #6e3482;
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .shop-btn:hover {
+            background: #582867;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 60px;
+
+            background: #49225b;
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        footer h2 {
+            font-size: 21px;
+            margin-bottom: 6px;
+        }
+
+        footer p {
+            color: #d8c9dd;
+            font-size: 12px;
+        }
+
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode {
+            background: #17121b;
+            color: white;
+        }
+
+        body.dark-mode .navbar {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .back {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .heading h1 {
+            color: white;
+        }
+
+        body.dark-mode .heading p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .order-card,
+        body.dark-mode .empty {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .order-header,
+        body.dark-mode .order-footer {
+            border-color: #44334b;
+        }
+
+        body.dark-mode .order-id,
+        body.dark-mode .product-name,
+        body.dark-mode .empty h2 {
+            color: white;
+        }
+
+        body.dark-mode .date,
+        body.dark-mode .product-quantity,
+        body.dark-mode .total-label,
+        body.dark-mode .payment,
+        body.dark-mode .empty p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .product-row {
+            border-color: #392a40;
+        }
+
+        body.dark-mode .product-image {
+            background: #34253b;
+        }
+
+        body.dark-mode .total {
+            color: white;
+        }
+
+        body.dark-mode .status {
+            background: #34253b;
+            color: #dda4eb;
+        }
+
+        body.dark-mode .delete-btn {
+            background: #39232b;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .container {
+                margin-top: 30px;
+            }
+
+            .heading h1 {
+                font-size: 27px;
+            }
+
+            .order-card {
+                padding: 17px;
+            }
+
+            .order-header {
+                align-items: flex-start;
+            }
+
+            .product-image {
+                width: 62px;
+                height: 72px;
+            }
+
+            .product-price {
+                font-size: 13px;
+            }
+
+            .order-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .buttons {
+                width: 100%;
+            }
+
+            .btn {
+                flex: 1;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'profile' %}" class="back">
+            ← Profile
+        </a>
+
+        <a href="{% url 'home' %}" class="logo">
+            VastraHub
+        </a>
+
+    </nav>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <div class="heading">
+
+            <h1>
+                My Orders
+            </h1>
+
+            <p>
+                Track and manage all your VastraHub orders.
+            </p>
+
+        </div>
+
+
+
+        {% if orders %}
+
+
+            {% for order in orders %}
+
+            <div class="order-card">
+
+
+                <!-- ORDER HEADER -->
+
+                <div class="order-header">
+
+                    <div>
+
+                        <div class="order-id">
+                            Order #{{ order.id }}
+                        </div>
+
+                        <div class="date">
+                            {{ order.created_at|date:"d M Y, h:i A" }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="status">
+                        {{ order.get_order_status_display }}
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRODUCTS -->
+
+                <div class="products">
+
+                    {% for item in order.items.all %}
+
+                    <div class="product-row">
+
+
+                        <div class="product-image">
+
+                            {% if item.product.image %}
+
+                                <img
+                                    src="{{ item.product.image.url }}"
+                                    alt="{{ item.product.name }}"
+                                >
+
+                            {% else %}
+
+                                <img
+                                    src="{% static 'products/images/no-image.png' %}"
+                                    alt="No Image"
+                                >
+
+                            {% endif %}
+
+                        </div>
+
+
+
+                        <div class="product-info">
+
+                            <div class="product-name">
+                                {{ item.product.name }}
+                            </div>
+
+                            <div class="product-quantity">
+                                Quantity: {{ item.quantity }}
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="product-price">
+                            ₹{{ item.price }}
+                        </div>
+
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+
+                <!-- ORDER FOOTER -->
+
+                <div class="order-footer">
+
+
+                    <div>
+
+                        <div class="total-label">
+                            Total Amount
+                        </div>
+
+                        <div class="total">
+                            ₹{{ order.total_amount }}
+                        </div>
+
+                        <div class="payment">
+                            Payment:
+                            {{ order.get_payment_method_display }}
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="buttons">
+
+                        <a
+                            href="{% url 'orders' %}"
+                            class="btn details-btn"
+                        >
+                            View Details
+                        </a>
+
+
+                        <a
+                            href="{% url 'delete_order' order.id %}"
+                            class="btn delete-btn"
+                            onclick="return confirm('Are you sure you want to delete this order?');"
+                        >
+                            Delete
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <!-- EMPTY -->
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h2>
+                    No Orders Yet
+                </h2>
+
+                <p>
+                    You haven't placed any orders yet.
+                    Start shopping and your orders will appear here.
+                </p>
+
+                <a
+                    href="{% url 'home' %}"
+                    class="shop-btn"
+                >
+                    Start Shopping
+                </a>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h2>
+            VastraHub
+        </h2>
+
+        <p>
+            Fashion that defines your style.
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================= THEME ================= -->
+
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+</body>
+
+</html>

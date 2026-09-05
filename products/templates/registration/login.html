@@ -1,0 +1,511 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8f1fb,
+                    #eadcf2
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #35213f;
+            padding: 20px;
+        }
+
+
+        /* MAIN */
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 950px;
+
+            min-height: 570px;
+
+            background: white;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            box-shadow:
+                0 20px 60px rgba(73, 34, 91, 0.16);
+        }
+
+
+        /* LEFT */
+
+        .login-left {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(48, 20, 61, .95),
+                    rgba(110, 52, 130, .88)
+                ),
+                url("{% static 'products/images/hero.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+
+            padding: 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .brand-line {
+            width: 50px;
+            height: 4px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .login-left h1 {
+            font-size: 42px;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .login-left p {
+            color: #eadcf0;
+            font-size: 14px;
+            line-height: 1.7;
+            max-width: 350px;
+        }
+
+
+        /* RIGHT */
+
+        .login-right {
+            padding: 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-title {
+            color: #49225b;
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .login-subtitle {
+            color: #8b7493;
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+
+        /* ERROR */
+
+        .error-box {
+            background: #fff0f2;
+            border: 1px solid #ffc5ce;
+            color: #c72d48;
+
+            padding: 11px 13px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        .form-group label {
+            display: block;
+
+            color: #49225b;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        .input-box {
+            width: 100%;
+            height: 48px;
+
+            border: 1px solid #dfcde6;
+
+            border-radius: 10px;
+
+            padding: 0 14px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            color: #35213f;
+
+            background: #fff;
+
+            transition: .2s;
+        }
+
+        .input-box:focus {
+            border-color: #6e3482;
+
+            box-shadow:
+                0 0 0 3px rgba(110, 52, 130, .08);
+        }
+
+
+        /* BUTTON */
+
+        .login-btn {
+            width: 100%;
+            height: 48px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #49225b,
+                    #74378a
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+            margin-top: 5px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(73, 34, 91, .25);
+        }
+
+
+        /* REGISTER */
+
+        .register-text {
+            text-align: center;
+
+            margin-top: 24px;
+
+            font-size: 13px;
+
+            color: #8b7493;
+        }
+
+        .register-text a {
+            color: #6e3482;
+            font-weight: bold;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* BACK HOME */
+
+        .back-home {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 16px;
+
+            color: #8b7493;
+
+            font-size: 12px;
+        }
+
+        .back-home:hover {
+            color: #49225b;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .login-wrapper {
+                grid-template-columns: 1fr;
+
+                min-height: auto;
+
+                max-width: 480px;
+            }
+
+            .login-left {
+                min-height: 210px;
+
+                padding: 30px;
+            }
+
+            .login-left h1 {
+                font-size: 30px;
+            }
+
+            .login-left p {
+                font-size: 12px;
+            }
+
+            .login-right {
+                padding: 30px 25px 35px;
+            }
+
+            .login-title {
+                font-size: 26px;
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            .login-left {
+                padding: 25px;
+            }
+
+            .login-right {
+                padding: 25px 20px 30px;
+            }
+
+            .login-left h1 {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="login-wrapper">
+
+
+    <!-- LEFT SIDE -->
+
+    <div class="login-left">
+
+        <div class="brand">
+            VastraHub
+        </div>
+
+        <div class="brand-line"></div>
+
+        <h1>
+            Welcome<br>
+            Back!
+        </h1>
+
+        <p>
+            Login to your VastraHub account and
+            continue shopping your favourite fashion.
+        </p>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="login-right">
+
+        <h2 class="login-title">
+            Login
+        </h2>
+
+        <p class="login-subtitle">
+            Enter your account details to continue.
+        </p>
+
+
+        <!-- LOGIN ERRORS -->
+
+        {% if form.errors %}
+
+            <div class="error-box">
+
+                Username or password is incorrect.
+                Please try again.
+
+            </div>
+
+        {% endif %}
+
+
+        {% if next %}
+
+            {% if user.is_authenticated %}
+
+                <div class="error-box">
+                    Your account does not have access
+                    to this page.
+                </div>
+
+            {% else %}
+
+                <div class="error-box">
+                    Please login to continue.
+                </div>
+
+            {% endif %}
+
+        {% endif %}
+
+
+        <!-- LOGIN FORM -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="next"
+                value="{{ next }}"
+            >
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="input-box"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                    autofocus
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="input-box"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-btn"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <!-- REGISTER -->
+
+        <div class="register-text">
+
+            Don't have an account?
+
+            <a href="{% url 'register' %}">
+                Create Account
+            </a>
+
+        </div>
+
+
+        <!-- HOME -->
+
+        <a
+            href="{% url 'home' %}"
+            class="back-home"
+        >
+            ← Back to VastraHub
+        </a>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

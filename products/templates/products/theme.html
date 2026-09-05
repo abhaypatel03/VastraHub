@@ -1,0 +1,695 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Theme | VastraHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f1fa;
+            color: #49225b;
+            min-height: 100vh;
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #eadfed;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #6e3482;
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .back {
+            color: #49225b;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .back:hover {
+            color: #6e3482;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto 70px;
+            padding: 0 20px;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            color: #3e194d;
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .heading p {
+            color: #817187;
+            font-size: 13px;
+        }
+
+        /* ================= CARD ================= */
+
+        .card {
+            background: white;
+            border: 1px solid #eadfed;
+            border-radius: 18px;
+            padding: 22px;
+
+            box-shadow: 0 10px 30px rgba(73, 34, 91, 0.07);
+        }
+
+        .card-title {
+            color: #3e194d;
+            font-size: 17px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .card-subtitle {
+            color: #817187;
+            font-size: 12px;
+            margin-bottom: 22px;
+        }
+
+        /* ================= THEME OPTIONS ================= */
+
+        .theme-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .theme-option {
+            position: relative;
+        }
+
+        .theme-option input {
+            display: none;
+        }
+
+        .theme-label {
+            display: block;
+            cursor: pointer;
+
+            border: 2px solid #eadfed;
+            border-radius: 15px;
+
+            padding: 15px;
+
+            transition: 0.25s;
+        }
+
+        .theme-label:hover {
+            border-color: #b88ac5;
+            transform: translateY(-2px);
+        }
+
+        .theme-option input:checked + .theme-label {
+            border-color: #6e3482;
+            box-shadow: 0 5px 18px rgba(110, 52, 130, 0.15);
+        }
+
+        /* ================= PREVIEW ================= */
+
+        .preview {
+            height: 180px;
+            border-radius: 10px;
+            overflow: hidden;
+
+            margin-bottom: 14px;
+
+            border: 1px solid #ddd;
+        }
+
+        /* LIGHT PREVIEW */
+
+        .light-preview {
+            background: #f7f1fa;
+        }
+
+        .light-top {
+            height: 35px;
+            background: white;
+            border-bottom: 1px solid #e5dce8;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 12px;
+
+            color: #6e3482;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .light-content {
+            padding: 15px;
+        }
+
+        .light-box {
+            height: 45px;
+            background: white;
+            border-radius: 7px;
+            border: 1px solid #eadfed;
+            margin-bottom: 10px;
+        }
+
+        .light-button {
+            width: 70px;
+            height: 22px;
+            border-radius: 5px;
+            background: #6e3482;
+        }
+
+        /* DARK PREVIEW */
+
+        .dark-preview {
+            background: #17121b;
+        }
+
+        .dark-top {
+            height: 35px;
+            background: #211827;
+            border-bottom: 1px solid #392a40;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 12px;
+
+            color: #dda4eb;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .dark-content {
+            padding: 15px;
+        }
+
+        .dark-box {
+            height: 45px;
+            background: #211827;
+            border-radius: 7px;
+            border: 1px solid #392a40;
+            margin-bottom: 10px;
+        }
+
+        .dark-button {
+            width: 70px;
+            height: 22px;
+            border-radius: 5px;
+            background: #8b4ca0;
+        }
+
+        /* ================= LABEL ================= */
+
+        .theme-name {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .theme-name h3 {
+            color: #49225b;
+            font-size: 14px;
+        }
+
+        .theme-name span {
+            color: #817187;
+            font-size: 11px;
+        }
+
+        .check {
+            width: 18px;
+            height: 18px;
+
+            border-radius: 50%;
+
+            border: 2px solid #cbb8d1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 10px;
+        }
+
+        .theme-option input:checked + .theme-label .check {
+            background: #6e3482;
+            border-color: #6e3482;
+            color: white;
+        }
+
+        /* ================= SAVE BUTTON ================= */
+
+        .save-btn {
+            width: 100%;
+            height: 46px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: #6e3482;
+            color: white;
+
+            margin-top: 22px;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #582867;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #49225b;
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        footer h2 {
+            font-size: 21px;
+            margin-bottom: 6px;
+        }
+
+        footer p {
+            color: #d8c9dd;
+            font-size: 12px;
+        }
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode {
+            background: #17121b;
+            color: white;
+        }
+
+        body.dark-mode .navbar {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .back {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .heading h1 {
+            color: white;
+        }
+
+        body.dark-mode .heading p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .card {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .card-title {
+            color: white;
+        }
+
+        body.dark-mode .card-subtitle {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .theme-label {
+            border-color: #4b3a52;
+        }
+
+        body.dark-mode .theme-label:hover {
+            border-color: #80628a;
+        }
+
+        body.dark-mode .theme-option input:checked + .theme-label {
+            border-color: #b26bc7;
+        }
+
+        body.dark-mode .theme-name h3 {
+            color: #eadff0;
+        }
+
+        body.dark-mode .theme-name span {
+            color: #bcaec2;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .container {
+                margin-top: 28px;
+                padding: 0 13px;
+            }
+
+            .heading h1 {
+                font-size: 26px;
+            }
+
+            .theme-options {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            VastraHub
+        </a>
+
+        <a href="{% url 'settings' %}" class="back">
+            ← Settings
+        </a>
+
+    </nav>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <div class="heading">
+
+            <h1>
+                Theme
+            </h1>
+
+            <p>
+                Choose how VastraHub looks on your device.
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= THEME CARD ================= -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Appearance
+            </div>
+
+            <div class="card-subtitle">
+                Select your preferred theme.
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="theme-options">
+
+
+                    <!-- ================= LIGHT ================= -->
+
+                    <div class="theme-option">
+
+                        <input
+                            type="radio"
+                            name="theme"
+                            value="light"
+                            id="lightMode"
+                            {% if current_theme == "light" %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <label
+                            for="lightMode"
+                            class="theme-label"
+                        >
+
+
+                            <div class="preview light-preview">
+
+                                <div class="light-top">
+                                    VastraHub
+                                </div>
+
+                                <div class="light-content">
+
+                                    <div class="light-box"></div>
+
+                                    <div class="light-button"></div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="theme-name">
+
+                                <div>
+
+                                    <h3>
+                                        ☀️ Light Mode
+                                    </h3>
+
+                                    <span>
+                                        Clean & bright
+                                    </span>
+
+                                </div>
+
+                                <div class="check">
+                                    ✓
+                                </div>
+
+                            </div>
+
+
+                        </label>
+
+                    </div>
+
+
+
+                    <!-- ================= DARK ================= -->
+
+                    <div class="theme-option">
+
+                        <input
+                            type="radio"
+                            name="theme"
+                            value="dark"
+                            id="darkMode"
+                            {% if current_theme == "dark" %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <label
+                            for="darkMode"
+                            class="theme-label"
+                        >
+
+
+                            <div class="preview dark-preview">
+
+                                <div class="dark-top">
+                                    VastraHub
+                                </div>
+
+                                <div class="dark-content">
+
+                                    <div class="dark-box"></div>
+
+                                    <div class="dark-button"></div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="theme-name">
+
+                                <div>
+
+                                    <h3>
+                                        🌙 Dark Mode
+                                    </h3>
+
+                                    <span>
+                                        Easy on the eyes
+                                    </span>
+
+                                </div>
+
+                                <div class="check">
+                                    ✓
+                                </div>
+
+                            </div>
+
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    Save Theme
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h2>
+            VastraHub
+        </h2>
+
+        <p>
+            Fashion that defines your style.
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================= THEME JS ================= -->
+
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+    <script>
+
+        const lightMode =
+            document.getElementById("lightMode");
+
+        const darkMode =
+            document.getElementById("darkMode");
+
+
+        function previewTheme() {
+
+            if (darkMode.checked) {
+
+                document.body.classList.add("dark-mode");
+
+                localStorage.setItem(
+                    "vastrahub_theme",
+                    "dark"
+                );
+
+            } else {
+
+                document.body.classList.remove("dark-mode");
+
+                localStorage.setItem(
+                    "vastrahub_theme",
+                    "light"
+                );
+
+            }
+
+        }
+
+
+        lightMode.addEventListener(
+            "change",
+            previewTheme
+        );
+
+
+        darkMode.addEventListener(
+            "change",
+            previewTheme
+        );
+
+    </script>
+
+
+</body>
+
+</html>

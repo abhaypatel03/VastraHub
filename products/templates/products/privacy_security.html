@@ -1,0 +1,742 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Privacy & Security | VastraHub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f1fa;
+            color: #49225b;
+            min-height: 100vh;
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #eadfed;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #6e3482;
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .back {
+            color: #49225b;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .back:hover {
+            color: #6e3482;
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto 70px;
+            padding: 0 20px;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            color: #3e194d;
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .heading p {
+            color: #817187;
+            font-size: 13px;
+        }
+
+        /* CARD */
+
+        .card {
+            background: white;
+            border: 1px solid #eadfed;
+            border-radius: 18px;
+            overflow: hidden;
+
+            box-shadow: 0 10px 30px rgba(73, 34, 91, 0.07);
+
+            margin-bottom: 18px;
+        }
+
+        .card-title {
+            padding: 19px 22px;
+            border-bottom: 1px solid #eadfed;
+
+            color: #3e194d;
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        /* ITEM */
+
+        .privacy-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 18px 22px;
+
+            border-bottom: 1px solid #f0e9f2;
+        }
+
+        .privacy-item:last-child {
+            border-bottom: none;
+        }
+
+        .privacy-icon {
+            width: 45px;
+            height: 45px;
+
+            flex-shrink: 0;
+
+            border-radius: 11px;
+
+            background: #f0e4f4;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+        .privacy-info {
+            flex: 1;
+        }
+
+        .privacy-info h3 {
+            color: #49225b;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .privacy-info p {
+            color: #817187;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* TOGGLE */
+
+        .toggle {
+            width: 45px;
+            height: 24px;
+
+            position: relative;
+
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+
+            background: #cbb8d1;
+
+            border-radius: 30px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .slider::before {
+            content: "";
+
+            width: 18px;
+            height: 18px;
+
+            position: absolute;
+
+            left: 3px;
+            top: 3px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            transition: 0.3s;
+        }
+
+        .toggle input:checked + .slider {
+            background: #6e3482;
+        }
+
+        .toggle input:checked + .slider::before {
+            transform: translateX(21px);
+        }
+
+        /* LINKS */
+
+        .privacy-link {
+            display: block;
+
+            padding: 18px 22px;
+
+            border-bottom: 1px solid #f0e9f2;
+
+            color: #6e3482;
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .privacy-link:last-child {
+            border-bottom: none;
+        }
+
+        .privacy-link:hover {
+            background: #fcf8fd;
+        }
+
+        .arrow {
+            float: right;
+            font-size: 19px;
+            color: #9b83a3;
+        }
+
+        /* INFO */
+
+        .info-box {
+            padding: 18px 22px;
+
+            background: #faf6fc;
+
+            color: #817187;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+        /* DANGER */
+
+        .danger {
+            border-color: #f0cbd2;
+        }
+
+        .danger .card-title {
+            color: #b4233c;
+        }
+
+        .delete-link {
+            display: block;
+
+            padding: 18px 22px;
+
+            color: #b4233c;
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .delete-link:hover {
+            background: #fff5f6;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #49225b;
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        footer h2 {
+            font-size: 21px;
+            margin-bottom: 6px;
+        }
+
+        footer p {
+            color: #d8c9dd;
+            font-size: 12px;
+        }
+
+        /* DARK MODE */
+
+        body.dark-mode {
+            background: #17121b;
+            color: white;
+        }
+
+        body.dark-mode .navbar {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .back {
+            color: #d8c9dd;
+        }
+
+        body.dark-mode .heading h1 {
+            color: white;
+        }
+
+        body.dark-mode .heading p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .card {
+            background: #211827;
+            border-color: #392a40;
+        }
+
+        body.dark-mode .card-title {
+            color: white;
+            border-color: #44334b;
+        }
+
+        body.dark-mode .privacy-item {
+            border-color: #392a40;
+        }
+
+        body.dark-mode .privacy-icon {
+            background: #34253b;
+        }
+
+        body.dark-mode .privacy-info h3 {
+            color: #eadff0;
+        }
+
+        body.dark-mode .privacy-info p {
+            color: #bcaec2;
+        }
+
+        body.dark-mode .privacy-link {
+            border-color: #392a40;
+            color: #dda4eb;
+        }
+
+        body.dark-mode .privacy-link:hover {
+            background: #2a1e30;
+        }
+
+        body.dark-mode .info-box {
+            background: #2a1e30;
+            color: #bcaec2;
+        }
+
+        body.dark-mode .danger {
+            border-color: #5a3038;
+        }
+
+        body.dark-mode .danger .card-title {
+            color: #ff7b91;
+        }
+
+        body.dark-mode .delete-link:hover {
+            background: #2b1b20;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .container {
+                margin-top: 28px;
+                padding: 0 13px;
+            }
+
+            .heading h1 {
+                font-size: 25px;
+            }
+
+            .privacy-item {
+                padding: 16px;
+            }
+
+            .privacy-icon {
+                width: 42px;
+                height: 42px;
+            }
+
+            .privacy-info p {
+                font-size: 10px;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            VastraHub
+        </a>
+
+        <a href="{% url 'settings' %}" class="back">
+            ← Settings
+        </a>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <div class="heading">
+
+            <h1>
+                Privacy & Security
+            </h1>
+
+            <p>
+                Control your privacy and manage how your account information is used.
+            </p>
+
+        </div>
+
+
+        <!-- PRIVACY -->
+
+        <section class="card">
+
+            <div class="card-title">
+                Privacy Controls
+            </div>
+
+
+            <!-- Profile Visibility -->
+
+            <div class="privacy-item">
+
+                <div class="privacy-icon">
+                    👤
+                </div>
+
+                <div class="privacy-info">
+
+                    <h3>
+                        Profile Privacy
+                    </h3>
+
+                    <p>
+                        Control how your profile information is displayed.
+                    </p>
+
+                </div>
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        id="profilePrivacy"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- Personalized Offers -->
+
+            <div class="privacy-item">
+
+                <div class="privacy-icon">
+                    🎯
+                </div>
+
+                <div class="privacy-info">
+
+                    <h3>
+                        Personalized Recommendations
+                    </h3>
+
+                    <p>
+                        Allow VastraHub to show products based on your preferences.
+                    </p>
+
+                </div>
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        id="recommendations"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- Activity -->
+
+            <div class="privacy-item">
+
+                <div class="privacy-icon">
+                    📊
+                </div>
+
+                <div class="privacy-info">
+
+                    <h3>
+                        Activity Data
+                    </h3>
+
+                    <p>
+                        Allow activity data to be used to improve your shopping experience.
+                    </p>
+
+                </div>
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        id="activityData"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- SECURITY -->
+
+        <section class="card">
+
+            <div class="card-title">
+                Security
+            </div>
+
+
+            <a
+                href="{% url 'security' %}"
+                class="privacy-link"
+            >
+
+                🔐 &nbsp; Account Security
+
+                <span class="arrow">
+                    ›
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'change_password' %}"
+                class="privacy-link"
+            >
+
+                🔑 &nbsp; Change Password
+
+                <span class="arrow">
+                    ›
+                </span>
+
+            </a>
+
+        </section>
+
+
+        <!-- DATA -->
+
+        <section class="card">
+
+            <div class="card-title">
+                Your Data
+            </div>
+
+
+            <a href="#" class="privacy-link">
+
+                📋 &nbsp; Privacy Policy
+
+                <span class="arrow">
+                    ›
+                </span>
+
+            </a>
+
+
+            <a href="#" class="privacy-link">
+
+                📄 &nbsp; Terms & Conditions
+
+                <span class="arrow">
+                    ›
+                </span>
+
+            </a>
+
+
+            <div class="info-box">
+
+                <strong>
+                    Your privacy matters.
+                </strong>
+
+                <br>
+
+                VastraHub uses your account information to provide
+                shopping, order and account services. Keep your account
+                password private and use a strong password for better security.
+
+            </div>
+
+        </section>
+
+
+        <!-- DELETE -->
+
+        <section class="card danger">
+
+            <div class="card-title">
+                Account Data
+            </div>
+
+            <a
+                href="{% url 'delete_account' %}"
+                class="delete-link"
+            >
+
+                🗑️ &nbsp; Delete Account
+
+                <span class="arrow">
+                    ›
+                </span>
+
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h2>
+            VastraHub
+        </h2>
+
+        <p>
+            Fashion that defines your style.
+        </p>
+
+    </footer>
+
+
+    <!-- THEME -->
+
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+    <!-- JS -->
+
+    <script>
+
+        const toggles = document.querySelectorAll(
+            ".toggle input"
+        );
+
+        toggles.forEach(function(toggle) {
+
+            toggle.addEventListener(
+                "change",
+                function() {
+
+                    if (this.checked) {
+
+                        console.log(
+                            this.id + " enabled"
+                        );
+
+                    } else {
+
+                        console.log(
+                            this.id + " disabled"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

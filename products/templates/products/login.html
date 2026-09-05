@@ -1,0 +1,753 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | VastraHub</title>
+
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #f7effa,
+                #ead8f0
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #49225b;
+
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           LOGIN CONTAINER
+        ========================= */
+
+        .login-container {
+
+            width: 100%;
+            max-width: 440px;
+
+            padding: 20px;
+        }
+
+
+        /* =========================
+           LOGIN CARD
+        ========================= */
+
+        .login-card {
+
+            background: white;
+
+            border: 1px solid #eadfed;
+
+            border-radius: 20px;
+
+            padding: 38px 35px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(73, 34, 91, 0.13);
+
+        }
+
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo {
+
+            text-align: center;
+
+            font-size: 30px;
+
+            font-weight: 900;
+
+            color: #6e3482;
+
+            margin-bottom: 8px;
+        }
+
+
+        .welcome {
+
+            text-align: center;
+
+            color: #3e194d;
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #817187;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =========================
+           MESSAGES
+        ========================= */
+
+        .message {
+
+            background: #fff0f0;
+
+            color: #c62828;
+
+            border: 1px solid #ffcaca;
+
+            padding: 11px 13px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #49225b;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d9c9df;
+
+            border-radius: 9px;
+
+            background: #fff;
+
+            color: #3e194d;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #6e3482;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(110, 52, 130, 0.10);
+        }
+
+
+        /* =========================
+           PASSWORD
+        ========================= */
+
+        .password-box {
+
+            position: relative;
+        }
+
+
+        .password-box input {
+
+            padding-right: 48px;
+        }
+
+
+        .show-password {
+
+            position: absolute;
+
+            right: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            color: #80668b;
+        }
+
+
+        /* =========================
+           REMEMBER / FORGOT
+        ========================= */
+
+        .options {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+
+            font-size: 13px;
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #75657a;
+        }
+
+
+        .remember input {
+
+            accent-color: #6e3482;
+
+            cursor: pointer;
+        }
+
+
+        .forgot {
+
+            color: #6e3482;
+
+            font-weight: 700;
+        }
+
+
+        .forgot:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #6e3482;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .login-btn:hover {
+
+            background: #582867;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           REGISTER
+        ========================= */
+
+        .register {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #817187;
+
+            font-size: 14px;
+        }
+
+
+        .register a {
+
+            color: #6e3482;
+
+            font-weight: 800;
+        }
+
+
+        .register a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           HOME
+        ========================= */
+
+        .home-link {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #80668b;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .home-link:hover {
+
+            color: #6e3482;
+        }
+
+
+        /* =========================
+           DARK MODE
+        ========================= */
+
+        body.dark-mode {
+
+            background: linear-gradient(
+                135deg,
+                #17121b,
+                #281c2d
+            );
+
+            color: white;
+        }
+
+
+        body.dark-mode .login-card {
+
+            background: #211827;
+
+            border-color: #392a40;
+        }
+
+
+        body.dark-mode .welcome {
+
+            color: white;
+        }
+
+
+        body.dark-mode .subtitle {
+
+            color: #bcaec2;
+        }
+
+
+        body.dark-mode .form-group label {
+
+            color: #e6d8e9;
+        }
+
+
+        body.dark-mode .form-group input {
+
+            background: #2a1e30;
+
+            border-color: #4a3851;
+
+            color: white;
+        }
+
+
+        body.dark-mode .form-group input::placeholder {
+
+            color: #9d8ca2;
+        }
+
+
+        body.dark-mode .remember {
+
+            color: #bcaec2;
+        }
+
+
+        body.dark-mode .register {
+
+            color: #bcaec2;
+        }
+
+
+        body.dark-mode .home-link {
+
+            color: #bcaec2;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            .login-container {
+
+                padding: 15px;
+            }
+
+            .login-card {
+
+                padding: 30px 22px;
+
+                border-radius: 16px;
+            }
+
+            .logo {
+
+                font-size: 27px;
+            }
+
+            .welcome {
+
+                font-size: 23px;
+            }
+
+            .options {
+
+                font-size: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="login-container">
+
+
+        <div class="login-card">
+
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                VastraHub
+
+            </div>
+
+
+            <h1 class="welcome">
+
+                Welcome Back 👋
+
+            </h1>
+
+
+            <p class="subtitle">
+
+                Login to continue shopping with VastraHub.
+
+            </p>
+
+
+
+            <!-- MESSAGES -->
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="message">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+
+            <!-- LOGIN FORM -->
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="id_username">
+
+                        Username
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="username"
+                        id="id_username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="id_password">
+
+                        Password
+
+                    </label>
+
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            name="password"
+                            id="id_password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword()"
+                            id="passwordButton"
+                            title="Show password"
+                        >
+
+                            👁
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- OPTIONS -->
+
+                <div class="options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            name="remember"
+                        >
+
+                        Remember me
+
+                    </label>
+
+
+                    <a
+                        href="{% url 'password_reset' %}"
+                        class="forgot"
+                    >
+
+                        Forgot Password?
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+
+                    Login
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- REGISTER -->
+
+            <div class="register">
+
+                Don't have an account?
+
+                <a href="{% url 'register' %}">
+
+                    Create Account
+
+                </a>
+
+            </div>
+
+
+
+            <!-- HOME -->
+
+            <a
+                href="{% url 'home' %}"
+                class="home-link"
+            >
+
+                ← Back to Home
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- THEME -->
+
+    <script src="{% static 'products/js/theme.js' %}"></script>
+
+
+    <!-- PASSWORD JS -->
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("id_password");
+
+            const button =
+                document.getElementById("passwordButton");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                button.innerHTML = "🙈";
+
+                button.title = "Hide password";
+
+            } else {
+
+                password.type = "password";
+
+                button.innerHTML = "👁";
+
+                button.title = "Show password";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
