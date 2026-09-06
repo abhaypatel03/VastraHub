@@ -13,7 +13,8 @@ import razorpay
 
 from .models import Product, ProductImage, CartItem, Order, OrderItem,  Wishlist, Address
 
-
+def home(request):
+    return render(request, "products/home.html")
 # =====================================================
 # RAZORPAY CLIENT
 # =====================================================
