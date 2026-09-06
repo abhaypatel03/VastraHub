@@ -22,8 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8v34dg$)**x=4r@l)4r(r5+%%9i-&#z!^^fr1-51&dcl8p$l&$'
 
 DEBUG = True
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    "vastrahub-4.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://vastrahub-4.onrender.com",
+]
 
 # =====================================================
 # APPLICATIONS
